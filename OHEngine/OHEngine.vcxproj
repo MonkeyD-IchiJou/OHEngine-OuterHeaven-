@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{1C627F43-5A61-48FB-803B-AEC4C8F26758}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>OHEngine</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\glew\include;$(SolutionDir)\glfw\include;$(SolutionDir)\Common\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)\glew\lib;$(SolutionDir)\glfw\lib-msvc100;$(SolutionDir)$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;winmm.lib;Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\glew\include;$(SolutionDir)\glfw\include;$(SolutionDir)\Common\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\glew\lib;$(SolutionDir)\glfw\lib-msvc100;$(SolutionDir)$(Configuration)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;glfw3.lib;opengl32.lib;winmm.lib;Common.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Bullet.cpp" />
+    <ClCompile Include="Source\Camera.cpp" />
+    <ClCompile Include="Source\Controller.cpp" />
+    <ClCompile Include="Source\Entity.cpp" />
+    <ClCompile Include="Source\EntityRenderer.cpp" />
+    <ClCompile Include="Source\FirstPersonCamera.cpp" />
+    <ClCompile Include="Source\InputsController.cpp" />
+    <ClCompile Include="Source\Light.cpp" />
+    <ClCompile Include="Source\LoadOBJ.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\MasterRenderer.cpp" />
+    <ClCompile Include="Source\Material.cpp" />
+    <ClCompile Include="Source\MeshBuilder.cpp" />
+    <ClCompile Include="Source\MeshLoader.cpp" />
+    <ClCompile Include="Source\Mesh_R.cpp" />
+    <ClCompile Include="Source\Mesh_T.cpp" />
+    <ClCompile Include="Source\Model.cpp" />
+    <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\ShaderProgram.cpp" />
+    <ClCompile Include="Source\SkyboxRenderer.cpp" />
+    <ClCompile Include="Source\SkyboxShader.cpp" />
+    <ClCompile Include="Source\StaticApplication.cpp" />
+    <ClCompile Include="Source\StaticShader.cpp" />
+    <ClCompile Include="Source\terrain.cpp" />
+    <ClCompile Include="Source\TerrainRenderer.cpp" />
+    <ClCompile Include="Source\TerrainShader.cpp" />
+    <ClCompile Include="Source\TextData.cpp" />
+    <ClCompile Include="Source\TextRenderer.cpp" />
+    <ClCompile Include="Source\TextShader.cpp" />
+    <ClCompile Include="Source\TextureData.cpp" />
+    <ClCompile Include="Source\TexturedModel.cpp" />
+    <ClCompile Include="Source\Utility.cpp" />
+    <ClCompile Include="Source\View.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Bullet.h" />
+    <ClInclude Include="Source\Camera.h" />
+    <ClInclude Include="Source\Controller.h" />
+    <ClInclude Include="Source\Entity.h" />
+    <ClInclude Include="Source\EntityRenderer.h" />
+    <ClInclude Include="Source\FirstPersonCamera.h" />
+    <ClInclude Include="Source\InputsController.h" />
+    <ClInclude Include="Source\Light.h" />
+    <ClInclude Include="Source\LoadOBJ.h" />
+    <ClInclude Include="Source\MasterRenderer.h" />
+    <ClInclude Include="Source\Material.h" />
+    <ClInclude Include="Source\MeshBuilder.h" />
+    <ClInclude Include="Source\MeshLoader.h" />
+    <ClInclude Include="Source\Mesh_R.h" />
+    <ClInclude Include="Source\Mesh_T.h" />
+    <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Player.h" />
+    <ClInclude Include="Source\ShaderProgram.h" />
+    <ClInclude Include="Source\SkyboxRenderer.h" />
+    <ClInclude Include="Source\SkyboxShader.h" />
+    <ClInclude Include="Source\StaticApplication.h" />
+    <ClInclude Include="Source\StaticShader.h" />
+    <ClInclude Include="Source\terrain.h" />
+    <ClInclude Include="Source\TerrainRenderer.h" />
+    <ClInclude Include="Source\TerrainShader.h" />
+    <ClInclude Include="Source\TextData.h" />
+    <ClInclude Include="Source\TextRenderer.h" />
+    <ClInclude Include="Source\TextShader.h" />
+    <ClInclude Include="Source\TextureData.h" />
+    <ClInclude Include="Source\TexturedModel.h" />
+    <ClInclude Include="Source\Utility.h" />
+    <ClInclude Include="Source\vertex.h" />
+    <ClInclude Include="Source\View.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
