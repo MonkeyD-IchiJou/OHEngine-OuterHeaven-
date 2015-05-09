@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{4a549596-798f-48c9-91ca-4ee17cd17fa9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{b6b076a2-cd39-4e3c-adad-54422cd3ab2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controller">
+      <UniqueIdentifier>{08d3faab-571e-40ff-8fd5-f8fe98359501}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{ed113941-dcd0-4897-a8c8-217a5947a871}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View">
+      <UniqueIdentifier>{b1447662-b087-496c-8437-32a5d8689542}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controller">
+      <UniqueIdentifier>{eabcf3a1-8e8c-48dd-89a9-9631a1990740}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controller\InputsController">
+      <UniqueIdentifier>{39700b8b-3116-4170-b8c2-dc2fe9437f38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controller\InputsController">
+      <UniqueIdentifier>{8f17e5b8-7da5-448b-82e1-11660574d23a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Entities">
+      <UniqueIdentifier>{492dc103-8e5e-4d67-89ad-c0c3c5968559}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Terrain">
+      <UniqueIdentifier>{ccc050cf-95e5-4a5a-a06c-3563a7f36ebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Text">
+      <UniqueIdentifier>{21eea0b0-1e49-4c22-a0dc-b668969b6907}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Entities">
+      <UniqueIdentifier>{217ed9df-c88f-43eb-be3a-5e502788d982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Text">
+      <UniqueIdentifier>{78b2828b-f53e-49f2-9600-9df0f9e6ed03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Terrain">
+      <UniqueIdentifier>{48d6a259-f29c-4493-8fea-a8e2e32c98c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\ShaderFiles">
+      <UniqueIdentifier>{46d5f253-2ac2-4437-9a5a-1a3980770fe8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\ShaderFiles">
+      <UniqueIdentifier>{5a2a3222-919a-4f57-8433-492859f603ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Players">
+      <UniqueIdentifier>{44834c01-10db-49d9-b3a2-f8b8e2821594}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Players">
+      <UniqueIdentifier>{706e1eb0-90dc-4d27-8017-1566d57ac495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View\RenderEngine">
+      <UniqueIdentifier>{19404106-b8be-46f8-9cc4-8ac4c77c6314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\View\RenderEngine">
+      <UniqueIdentifier>{9d4c06b9-f1f6-41ef-af6c-a39eb2b67401}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Camera">
+      <UniqueIdentifier>{26531551-2218-474c-9c59-64460923ee78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Camera">
+      <UniqueIdentifier>{ab5dcd34-c398-47e9-b9ca-763f2de21482}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\Projectile Weapons">
+      <UniqueIdentifier>{8d19a7c4-d219-4390-a526-d986151ae1c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\Projectile Weapons">
+      <UniqueIdentifier>{7ae9e1dd-ab9d-4528-b49e-32af6e590d0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\MeshData">
+      <UniqueIdentifier>{431e9572-84ca-4b1d-94bb-2148b252602a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\MeshData">
+      <UniqueIdentifier>{55f6e385-2273-44a9-b948-debd95236a02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\MeshConstructHelper">
+      <UniqueIdentifier>{7de05b6b-6018-4363-ba0d-bd5eb69800fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\MeshConstructHelper">
+      <UniqueIdentifier>{c6415827-6d70-47aa-92f9-df4620234503}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\View.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Controller.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Model.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\InputsController.cpp">
+      <Filter>Source Files\Controller\InputsController</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Entity.cpp">
+      <Filter>Source Files\Model\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextData.cpp">
+      <Filter>Source Files\Model\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\terrain.cpp">
+      <Filter>Source Files\Model\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextShader.cpp">
+      <Filter>Source Files\View\ShaderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TerrainShader.cpp">
+      <Filter>Source Files\View\ShaderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StaticShader.cpp">
+      <Filter>Source Files\View\ShaderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ShaderProgram.cpp">
+      <Filter>Source Files\View\ShaderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyboxShader.cpp">
+      <Filter>Source Files\View\ShaderFiles</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Player.cpp">
+      <Filter>Source Files\Model\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\EntityRenderer.cpp">
+      <Filter>Source Files\View\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MasterRenderer.cpp">
+      <Filter>Source Files\View\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SkyboxRenderer.cpp">
+      <Filter>Source Files\View\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TerrainRenderer.cpp">
+      <Filter>Source Files\View\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextRenderer.cpp">
+      <Filter>Source Files\View\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Camera.cpp">
+      <Filter>Source Files\Model\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\FirstPersonCamera.cpp">
+      <Filter>Source Files\Model\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Bullet.cpp">
+      <Filter>Source Files\Model\Projectile Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Light.cpp">
+      <Filter>Source Files\Model\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StaticApplication.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Source Files\Model\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Material.cpp">
+      <Filter>Source Files\Model\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh_R.cpp">
+      <Filter>Source Files\Model\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh_T.cpp">
+      <Filter>Source Files\Model\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TextureData.cpp">
+      <Filter>Source Files\Model\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TexturedModel.cpp">
+      <Filter>Source Files\Model\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshBuilder.cpp">
+      <Filter>Source Files\Model\MeshConstructHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MeshLoader.cpp">
+      <Filter>Source Files\Model\MeshConstructHelper</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\View.h">
+      <Filter>Header Files\View</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Controller.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Model.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\InputsController.h">
+      <Filter>Header Files\Controller\InputsController</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Entity.h">
+      <Filter>Header Files\Model\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Light.h">
+      <Filter>Header Files\Model\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\terrain.h">
+      <Filter>Header Files\Model\Terrain</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextData.h">
+      <Filter>Header Files\Model\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StaticShader.h">
+      <Filter>Header Files\View\ShaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TerrainShader.h">
+      <Filter>Header Files\View\ShaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ShaderProgram.h">
+      <Filter>Header Files\View\ShaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyboxShader.h">
+      <Filter>Header Files\View\ShaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextShader.h">
+      <Filter>Header Files\View\ShaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Player.h">
+      <Filter>Header Files\Model\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\EntityRenderer.h">
+      <Filter>Header Files\View\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MasterRenderer.h">
+      <Filter>Header Files\View\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SkyboxRenderer.h">
+      <Filter>Header Files\View\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextRenderer.h">
+      <Filter>Header Files\View\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TerrainRenderer.h">
+      <Filter>Header Files\View\ShaderFiles</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Camera.h">
+      <Filter>Header Files\Model\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FirstPersonCamera.h">
+      <Filter>Header Files\Model\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Bullet.h">
+      <Filter>Header Files\Model\Projectile Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StaticApplication.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Material.h">
+      <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh_R.h">
+      <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Mesh_T.h">
+      <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TextureData.h">
+      <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TexturedModel.h">
+      <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\vertex.h">
+      <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshLoader.h">
+      <Filter>Header Files\Model\MeshConstructHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MeshBuilder.h">
+      <Filter>Header Files\Model\MeshConstructHelper</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
