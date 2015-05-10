@@ -51,6 +51,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)\glew\include;$(SolutionDir)\glfw\include;$(SolutionDir)\Common\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +132,8 @@
     <ClInclude Include="Source\Mesh_R.h" />
     <ClInclude Include="Source\Mesh_T.h" />
     <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\MyApplication.h" />
+    <ClInclude Include="Source\MyGL.h" />
     <ClInclude Include="Source\Player.h" />
     <ClInclude Include="Source\ShaderProgram.h" />
     <ClInclude Include="Source\SkyboxRenderer.h" />

@@ -171,9 +171,6 @@
     <ClCompile Include="Source\Light.cpp">
       <Filter>Source Files\Model\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Source\StaticApplication.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="Source\LoadOBJ.cpp">
       <Filter>Source Files\Model\MeshData</Filter>
     </ClCompile>
@@ -197,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="Source\MeshLoader.cpp">
       <Filter>Source Files\Model\MeshConstructHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\StaticApplication.cpp">
+      <Filter>Source Files\Controller</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -269,12 +269,6 @@
     <ClInclude Include="Source\Bullet.h">
       <Filter>Header Files\Model\Projectile Weapons</Filter>
     </ClInclude>
-    <ClInclude Include="Source\StaticApplication.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LoadOBJ.h">
-      <Filter>Header Files\Model\MeshData</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Material.h">
       <Filter>Header Files\Model\MeshData</Filter>
     </ClInclude>
@@ -298,6 +292,18 @@
     </ClInclude>
     <ClInclude Include="Source\MeshBuilder.h">
       <Filter>Header Files\Model\MeshConstructHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LoadOBJ.h">
+      <Filter>Header Files\Model\MeshConstructHelper</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\StaticApplication.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MyApplication.h">
+      <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MyGL.h">
+      <Filter>Header Files\Controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
