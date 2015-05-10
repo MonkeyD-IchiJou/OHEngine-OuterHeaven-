@@ -7,7 +7,7 @@
 */
 /******************************************************************************/
 
-#include "GL\glew.h"
+#include "MyGL.h"
 #include "EntityRenderer.h"
 #include "Utility.h"
 
@@ -50,7 +50,7 @@ void EntityRenderer::render(map<TexturedModel, vector<Entity>> entities)
             model.LoadIdentity();
             model.PushMatrix();
             prepareInstance(it->second[i]);
-            glDrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
+            GL::DrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
             model.PopMatrix();
         }
 
@@ -64,19 +64,19 @@ void EntityRenderer::prepareTexturedModel(TexturedModel model)
     unsigned int vaoID = model.getRawModel().getVaoID();
     unsigned int textureID = model.getTexturedModel().getTextureID();
 
-    glBindVertexArray(vaoID);
+    GL::BindVertexArray(vaoID);
 
-    glEnableVertexAttribArray(0); // 1st attribute buffer : vertices
-	glEnableVertexAttribArray(1); // 2nd attribute buffer : colors
-	glEnableVertexAttribArray(2); // 3rd attribute buffer : normal
-    glEnableVertexAttribArray(3); // 4th attribute buffer : texture
+    GL::EnableVertexAttribArray(0); // 1st attribute buffer : vertices
+	GL::EnableVertexAttribArray(1); // 2nd attribute buffer : colors
+	GL::EnableVertexAttribArray(2); // 3rd attribute buffer : normal
+    GL::EnableVertexAttribArray(3); // 4th attribute buffer : texture
 
     // end transformation
     if(textureID > 0)
 	{
         shader->load_ColorTextureEnable(1);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, textureID);
+		GL::ActiveTexture(GL_TEXTURE0);
+		GL::BindTexture(GL_TEXTURE_2D, textureID);
         shader->load_TextureColor(0);   // this means using the first texture
 	}
 	else
@@ -87,14 +87,14 @@ void EntityRenderer::prepareTexturedModel(TexturedModel model)
 
 void EntityRenderer::unbindTexturedModel(void)
 {
-    glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-    glDisableVertexAttribArray(2);
-    glDisableVertexAttribArray(3);
+    GL::DisableVertexAttribArray(0);
+	GL::DisableVertexAttribArray(1);
+    GL::DisableVertexAttribArray(2);
+    GL::DisableVertexAttribArray(3);
 
-    glBindTexture(GL_TEXTURE_2D, 0);
+    GL::BindTexture(GL_TEXTURE_2D, 0);
 
-    glBindVertexArray(0);
+    GL::BindVertexArray(0);
 }
 
 void EntityRenderer::prepareInstance(Entity &entity)

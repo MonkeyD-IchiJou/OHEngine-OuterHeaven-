@@ -45,7 +45,6 @@ public:
 
     void load_TextEnabled(bool enableText);
     void load_TextColor(Color color);
-
 };
 
 #endif

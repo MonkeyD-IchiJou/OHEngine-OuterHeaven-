@@ -17,7 +17,7 @@ applying methods to load shader file here
 #include <stdlib.h>
 #include <string.h>
 
-#include <GL/glew.h>
+#include "MyGL.h"
 #include "ShaderProgram.h"
 
 GLint ShaderProgram::Result = GL_FALSE;
@@ -35,15 +35,16 @@ ShaderProgram::ShaderProgram(const char * vertex_file_path, const char * fragmen
 
     // Link the program
 	printf("Linking program\n");
-	ProgramID = glCreateProgram();
-	glAttachShader(ProgramID, VertexShaderID);
-	glAttachShader(ProgramID, FragmentShaderID);
-	glLinkProgram(ProgramID);
+	ProgramID = GL::CreateProgram();
+    GL::AttachShader(ProgramID, VertexShaderID);
+	GL::AttachShader(ProgramID, FragmentShaderID);
+	GL::LinkProgram(ProgramID);
 
 
     // validate the program
-	glGetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
-	glGetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
+    GL::GetProgramiv(ProgramID, GL_LINK_STATUS, &Result);
+    GL::GetProgramiv(ProgramID, GL_INFO_LOG_LENGTH, &InfoLogLength);
+
 	if ( InfoLogLength > 0 ){
 		std::vector<char> ProgramErrorMessage(InfoLogLength+1);
 		glGetProgramInfoLog(ProgramID, InfoLogLength, NULL, &ProgramErrorMessage[0]);
@@ -57,7 +58,7 @@ ShaderProgram::ShaderProgram(const char * vertex_file_path, const char * fragmen
 GLuint ShaderProgram::LoadShader(const char * file_path, GLenum type)
 {
     // Create the shaders
-	GLuint ShaderID = glCreateShader(type);
+	GLuint ShaderID = GL::CreateShader(type);
 
 	// Read the Vertex Shader code from the file
 	std::string ShaderCode;
@@ -78,7 +79,7 @@ GLuint ShaderProgram::LoadShader(const char * file_path, GLenum type)
 	printf("Compiling shader : %s\n", file_path);
 	char const * ShaderSourcePointer = ShaderCode.c_str();
 	glShaderSource(ShaderID, 1, &ShaderSourcePointer , NULL);
-	glCompileShader(ShaderID);
+	GL::CompileShader(ShaderID);
 
     // Check Shader
 	glGetShaderiv(ShaderID, GL_COMPILE_STATUS, &Result);
@@ -94,20 +95,20 @@ GLuint ShaderProgram::LoadShader(const char * file_path, GLenum type)
 
 void ShaderProgram::Start(void)
 {
-    glUseProgram(ProgramID);
+    GL::UseProgram(ProgramID);
 }
 
 void ShaderProgram::Stop(void)
 {
-    glUseProgram(0);
+    GL::UseProgram(0);
 }
 
 void ShaderProgram::CleanUp(void)
 {
-    glDetachShader(ProgramID, VertexShaderID);
-    glDetachShader(ProgramID, FragmentShaderID);
-    glDeleteShader(VertexShaderID);
-	glDeleteShader(FragmentShaderID);
+    GL::DetachShader(ProgramID, VertexShaderID);
+    GL::DetachShader(ProgramID, FragmentShaderID);
+    GL::DeleteShader(VertexShaderID);
+	GL::DeleteShader(FragmentShaderID);
 }
 
 unsigned int ShaderProgram::getUniformLocation(const char* uniformName)
@@ -153,5 +154,5 @@ void ShaderProgram::loadU_Mat4f(unsigned int location, Mtx44 matrix)
 
 ShaderProgram::~ShaderProgram()
 {
-    glDeleteProgram(ProgramID);
+    GL::DeleteProgram(ProgramID);
 }

@@ -8,7 +8,6 @@ All rendering datas is here
 /******************************************************************************/
 
 #include "Model.h"
-
 #include "MeshBuilder.h"
 #include "MyMath.h"
 #include <iostream>

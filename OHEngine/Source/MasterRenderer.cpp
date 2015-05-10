@@ -9,6 +9,8 @@ Optimised render class to render mesh, main rendering loop is here
 /******************************************************************************/
 
 #include "MasterRenderer.h"
+#include "MyApplication.h"
+#include "MyGL.h"
 
 double MasterRenderer::FOV = 90.0;
 double MasterRenderer::ASPECT = 4.0 / 3.0;
@@ -68,28 +70,28 @@ MasterRenderer::~MasterRenderer(void)
 void MasterRenderer::prepare(void)
 {
     // Set background color to dark blue
-	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+    GL::ClearColor(0.0f, 0.f, 0.4f, 0.f);
 
-	//Enable depth buffer and depth testing
-	glEnable(GL_DEPTH_TEST);
+    //Enable back face culling
+    GL::Enable(GL_DEPTH_TEST);
 
     // Accept fragment if it closer to the camera than the former one
-	glDepthFunc(GL_LESS); 
+	GL::DepthFunc(GL_LESS); 
 
 	//Enable back face culling
-	glEnable(GL_CULL_FACE);
+	GL::Enable(GL_CULL_FACE);
 
 	//Default to fill mode
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	GL::PolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    glEnable(GL_BLEND);
+    GL::Enable(GL_BLEND);
 
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	GL::BlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void MasterRenderer::ready(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	GL::Clear(GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT);
 }
 
 void MasterRenderer::processEntity(Entity &entity)

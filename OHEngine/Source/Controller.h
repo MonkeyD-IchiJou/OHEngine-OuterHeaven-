@@ -14,7 +14,6 @@ input status, create main window ...
 #include "timer.h"
 #include "View.h"
 #include "InputsController.h"
-#include "StaticApplication.h"
 
 class Controller
 {
@@ -30,7 +29,6 @@ private:
     const static int m_window_height = 480;
     const static int m_window_deadzone = 100;
 
-    StaticApplication Application;
     InputsController inputs;
 
     bool GetKeyBoardUpdate(void);
