@@ -171,9 +171,6 @@
     <ClCompile Include="Source\Light.cpp">
       <Filter>Source Files\Model\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LoadOBJ.cpp">
-      <Filter>Source Files\Model\MeshData</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Material.cpp">
       <Filter>Source Files\Model\MeshData</Filter>
     </ClCompile>
@@ -195,8 +192,8 @@
     <ClCompile Include="Source\MeshLoader.cpp">
       <Filter>Source Files\Model\MeshConstructHelper</Filter>
     </ClCompile>
-    <ClCompile Include="Source\StaticApplication.cpp">
-      <Filter>Source Files\Controller</Filter>
+    <ClCompile Include="Source\LoadOBJ.cpp">
+      <Filter>Source Files\Model\MeshConstructHelper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,9 +254,6 @@
     <ClInclude Include="Source\TextRenderer.h">
       <Filter>Header Files\View\RenderEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Source\TerrainRenderer.h">
-      <Filter>Header Files\View\ShaderFiles</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Camera.h">
       <Filter>Header Files\Model\Camera</Filter>
     </ClInclude>
@@ -296,14 +290,14 @@
     <ClInclude Include="Source\LoadOBJ.h">
       <Filter>Header Files\Model\MeshConstructHelper</Filter>
     </ClInclude>
-    <ClInclude Include="Source\StaticApplication.h">
-      <Filter>Header Files\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="Source\MyApplication.h">
       <Filter>Header Files\Controller</Filter>
     </ClInclude>
     <ClInclude Include="Source\MyGL.h">
       <Filter>Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TerrainRenderer.h">
+      <Filter>Header Files\View\RenderEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

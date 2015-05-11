@@ -102,7 +102,6 @@
     <ClCompile Include="Source\ShaderProgram.cpp" />
     <ClCompile Include="Source\SkyboxRenderer.cpp" />
     <ClCompile Include="Source\SkyboxShader.cpp" />
-    <ClCompile Include="Source\StaticApplication.cpp" />
     <ClCompile Include="Source\StaticShader.cpp" />
     <ClCompile Include="Source\terrain.cpp" />
     <ClCompile Include="Source\TerrainRenderer.cpp" />
@@ -138,7 +137,6 @@
     <ClInclude Include="Source\ShaderProgram.h" />
     <ClInclude Include="Source\SkyboxRenderer.h" />
     <ClInclude Include="Source\SkyboxShader.h" />
-    <ClInclude Include="Source\StaticApplication.h" />
     <ClInclude Include="Source\StaticShader.h" />
     <ClInclude Include="Source\terrain.h" />
     <ClInclude Include="Source\TerrainRenderer.h" />
