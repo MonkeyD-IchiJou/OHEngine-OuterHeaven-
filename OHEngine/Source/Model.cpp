@@ -77,7 +77,7 @@ void Model::MeshInit(void)
 
     // text init
     mesh = MeshBuilder::GenerateText(16, 16);
-    texmesh = loader->loadTexture("Image//JokerFont.tga");
+    texmesh = loader->loadTexture("Image//MineCraftText.tga");
     textMeshStorage["JOKERFONT"] = TexturedModel(*mesh, *texmesh); 
     
     delete mesh;
@@ -191,7 +191,10 @@ void Model::TerrainInit(void)
 
 void Model::TextEntityInit(void)
 {
-    text["100X1"] = TextData(textMeshStorage["JOKERFONT"], "ABCDEFGHIJKLMNOP", Color(0.f, 1.f, 1.f), 5.f, Vector2(10.f, 10.f)); 
+    std::string a;
+    char c = 2;
+    a.push_back(c);
+    text["100X1"] = TextData(textMeshStorage["JOKERFONT"], words, Color(0.f, 0.f, 0.f), 5.f, Vector2(10.f, 10.f)); 
 }
 
 void Model::Update(const double dt)
@@ -209,6 +212,7 @@ void Model::Update(const double dt)
         arrBullets[i].Update(dt);
     }
 
+    text["100X1"];
     entity["300E1"].setPosition(arrBullets[0].getPosition());
 }
 
@@ -251,6 +255,19 @@ void Model::UpdateMouseCameraStatus(const unsigned char key)
 void Model::UpdateGLStatus(const unsigned char key)
 {
     controller.UpdateMyKeysStatus(key);
+}
+
+void Model::UpdateWordsStatus(const unsigned char key)
+{
+    if (key == 8 && text["100X1"].getText().size() > 0)       // if never pressed 8
+    {
+        text["100X1"].popText();
+    }
+
+    if (key != 8)
+    {
+        text["100X1"].setText(key);
+    }
 }
 
 Model::~Model(void)

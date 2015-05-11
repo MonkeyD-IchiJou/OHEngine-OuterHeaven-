@@ -38,9 +38,14 @@ std::string TextData::getText(void)
     return text;
 }
 
-void TextData::setText(std::string text)
+void TextData::setText(char key)
 {
-    this->text = text;
+    this->text.push_back(key); 
+}
+
+void TextData::popText()
+{
+    this->text.pop_back(); 
 }
 
 Color TextData::getColor(void)

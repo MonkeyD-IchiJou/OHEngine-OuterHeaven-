@@ -47,7 +47,7 @@ public:
     std::map<std::string, TextData> text;               // store text with id name
     std::map<std::string, Terrain> terrain;             // store terrain with id name
 
-    InputsController controller;                  
+    InputsController controller;       
 
     Camera camera;                          // my scene has a camera
     Light light[StaticShaders::MAX_LIGHT];  // my scene has light
@@ -61,7 +61,9 @@ public:
     virtual void UpdateMouseCameraStatus(const unsigned char key); 
     virtual void UpdateGLStatus(const unsigned char key);           
     virtual void UpdateWeaponStatus(const unsigned char key);   
-    virtual void UpdatePlayerStatus(const unsigned char key);       
+    virtual void UpdatePlayerStatus(const unsigned char key);
+    virtual void UpdateWordsStatus(const unsigned char key);
+    std::string words;
 
     void InitModel(void);
     void Update(const double dt);

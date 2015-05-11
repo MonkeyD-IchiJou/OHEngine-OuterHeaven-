@@ -32,7 +32,8 @@ public:
     void setTextMesh(TexturedModel textMesh);
 
     std::string getText(void);
-    void setText(std::string text);
+    void setText(char key);
+    void popText();
 
     Color getColor(void);
     void setColor(Color color);

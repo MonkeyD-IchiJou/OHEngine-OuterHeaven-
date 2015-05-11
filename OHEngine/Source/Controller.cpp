@@ -33,17 +33,73 @@ Controller::Controller(Model *theModel, View *theView) : theModel(NULL), theView
 
 bool Controller::GetKeyBoardUpdate(void)
 {
+    /*if(Application::IsKeyPressed(VK_BACK))
+    {
+        theModel->UpdateWordsStatus(8);
+    }*/
+
     if(Application::IsKeyPressed('A'))
     {
         theModel->UpdateCameraStatus('a');
         theModel->UpdatePlayerStatus('a');
+        //theModel->UpdateWordsStatus('A');
     }
 
+    /*if(Application::IsKeyPressed('B'))
+    {
+        theModel->UpdateWordsStatus('B');
+    }
+
+    if(Application::IsKeyPressed('C'))
+    {
+        theModel->UpdateWordsStatus('C');
+    }*/
+    
     if(Application::IsKeyPressed('D'))
     {
         theModel->UpdateCameraStatus('d');
         theModel->UpdatePlayerStatus('d');
     }
+
+   /* if(Application::IsKeyPressed('E'))
+    {
+        theModel->UpdateWordsStatus('E');
+    }
+
+    if(Application::IsKeyPressed('F'))
+    {
+        theModel->UpdateWordsStatus('F');
+    }
+
+    if(Application::IsKeyPressed('G'))
+    {
+        theModel->UpdateWordsStatus('G');
+    }
+
+    if(Application::IsKeyPressed('H'))
+    {
+        theModel->UpdateWordsStatus('H');
+    }
+
+    if(Application::IsKeyPressed('I'))
+    {
+        theModel->UpdateWordsStatus('I');
+    }
+
+    if(Application::IsKeyPressed('K'))
+    {
+        theModel->UpdateWordsStatus('K');
+    }
+
+    if(Application::IsKeyPressed('L'))
+    {
+        theModel->UpdateWordsStatus('L');
+    }
+
+    if(Application::IsKeyPressed('M'))
+    {
+        theModel->UpdateWordsStatus('M');
+    }*/
 
     if(Application::IsKeyPressed('W'))
     {
@@ -155,10 +211,10 @@ void Controller::ControllerInit(void)
     m_dAccumulatedTime = 0;
 
     Application::InitGLFW();
-    Application::CreateGLWindow(m_window_width, m_window_height, "Testing 1");
+    Application::CreateGLWindow(m_window_width, m_window_height, "MVC Testing 1");
     Application::ReSizeGLScene(); 
     GL::InitGLEW();
-    Application::DisableCursor();
+    //Application::DisableCursor();
     Application::MouseScrollUpdate();
 }
 
