@@ -97,6 +97,9 @@
     <Filter Include="Header Files\Model\MeshConstructHelper">
       <UniqueIdentifier>{c6415827-6d70-47aa-92f9-df4620234503}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{b46b1a75-081b-4f0f-8716-cfdab169d4ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="Source\LoadOBJ.cpp">
       <Filter>Source Files\Model\MeshConstructHelper</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Mesh_TerrainT.cpp">
+      <Filter>Source Files\Model\MeshData</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -299,5 +305,25 @@
     <ClInclude Include="Source\TerrainRenderer.h">
       <Filter>Header Files\View\RenderEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Mesh_TerrainT.h">
+      <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\comg.fragmentshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\comg.vertexshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\TerrainFragmentShader.fragmentshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\TerrainVertexShader.vertexshader">
+      <Filter>Shader</Filter>
+    </None>
+    <None Include="Shader\MultiTexture.fragmentshader">
+      <Filter>Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

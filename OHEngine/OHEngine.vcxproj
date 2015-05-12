@@ -97,6 +97,7 @@
     <ClCompile Include="Source\MeshLoader.cpp" />
     <ClCompile Include="Source\Mesh_R.cpp" />
     <ClCompile Include="Source\Mesh_T.cpp" />
+    <ClCompile Include="Source\Mesh_TerrainT.cpp" />
     <ClCompile Include="Source\Model.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\ShaderProgram.cpp" />
@@ -130,6 +131,7 @@
     <ClInclude Include="Source\MeshLoader.h" />
     <ClInclude Include="Source\Mesh_R.h" />
     <ClInclude Include="Source\Mesh_T.h" />
+    <ClInclude Include="Source\Mesh_TerrainT.h" />
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\MyApplication.h" />
     <ClInclude Include="Source\MyGL.h" />
@@ -149,6 +151,13 @@
     <ClInclude Include="Source\Utility.h" />
     <ClInclude Include="Source\vertex.h" />
     <ClInclude Include="Source\View.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\comg.fragmentshader" />
+    <None Include="Shader\comg.vertexshader" />
+    <None Include="Shader\MultiTexture.fragmentshader" />
+    <None Include="Shader\TerrainFragmentShader.fragmentshader" />
+    <None Include="Shader\TerrainVertexShader.vertexshader" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
