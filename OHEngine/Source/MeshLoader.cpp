@@ -13,6 +13,7 @@ To store VBOs and IBO (index buffer) and bind both under VAO
 std::vector<unsigned int> MeshLoader::vaos;
 std::vector<unsigned int> MeshLoader::vbos;
 std::vector<unsigned int> MeshLoader::textures;
+std::vector<unsigned int> MeshLoader::Terrain_textures;
 
 MeshLoader::MeshLoader(void)
 {
@@ -96,7 +97,72 @@ Mesh_TexturedModel* MeshLoader::loadTexture(const char *file_path)
 
     glBindTexture(GL_TEXTURE_2D, 0);
 
-	return new Mesh_TexturedModel(texture);		
+    return new Mesh_TexturedModel(texture);		
+}
+
+// for multitexture
+unsigned int MeshLoader::loadMultiTexture(const char *file_path)
+{
+    std::ifstream fileStream(file_path, std::ios::binary);
+	if(!fileStream.is_open()) {
+		std::cout << "Impossible to open " << file_path << ". Are you in the right directory ?\n";
+		return 0;
+	}
+
+	GLubyte		header[ 18 ];									// first 6 useful header bytes
+	GLuint		bytesPerPixel;								    // number of bytes per pixel in TGA gile
+	GLuint		imageSize;									    // for setting memory
+	GLubyte *	data;
+	GLuint		texture = 0;
+	unsigned	width, height;
+
+	fileStream.read((char*)header, 18);
+	width = header[12] + header[13] * 256;
+	height = header[14] + header[15] * 256;
+
+ 	if(	width <= 0 ||								// is width <= 0
+		height <= 0 ||								// is height <=0
+		(header[16] != 24 && header[16] != 32))		// is TGA 24 or 32 Bit
+	{
+		fileStream.close();							// close file on failure
+		std::cout << "File header error.\n";
+		return 0;										
+	}
+
+	bytesPerPixel	= header[16] / 8;						//divide by 8 to get bytes per pixel
+	imageSize		= width * height * bytesPerPixel;	// calculate memory required for TGA data
+	
+	data = new GLubyte[ imageSize ];
+	fileStream.seekg(18, std::ios::beg);
+	fileStream.read((char *)data, imageSize);
+	fileStream.close();	
+
+	glGenTextures(1, &texture);
+    Terrain_textures.push_back(texture);        // store the id
+
+	glBindTexture(GL_TEXTURE_2D, texture);
+	if(bytesPerPixel == 3)
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+	else //bytesPerPixel == 4
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);// try change the BGRA to RGBA     // data is the buffer that thin matrix is talking about
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+	float maxAnisotropy = 1.f;
+	glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &maxAnisotropy);
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, (GLint)maxAnisotropy );
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);       // try change to GL_CLAMP or GL_CLAMP_TO_EDGE
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);       
+	
+	glGenerateMipmap( GL_TEXTURE_2D );
+	
+	delete []data;
+
+    glBindTexture(GL_TEXTURE_2D, 0);
+
+    return texture;	
 }
 
 unsigned int MeshLoader::loadCubeMap(const char *file_path[6])
@@ -204,4 +270,5 @@ void MeshLoader::CleanUpBufferObjects(void)
     glDeleteVertexArrays(vaos.size(), &vaos[0]);
     glDeleteBuffers(vbos.size(), &vbos[0]);
     glDeleteTextures(textures.size(), &textures[0]);
+    glDeleteTextures(Terrain_textures.size(), &Terrain_textures[0]);
 }

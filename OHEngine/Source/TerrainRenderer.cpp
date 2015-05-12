@@ -36,8 +36,12 @@ void TerrainRenderer::render(std::vector<Terrain> terrains)
 void TerrainRenderer::prepareTerrain(Terrain terrain)
 {
     unsigned int vaoID = terrain.getRawModel().getVaoID();
-    unsigned int textureID = terrain.getTexturedModel().getTextureID();
-
+    unsigned int textureID[2];
+    
+    
+       textureID[0] = terrain.getTexturedModel().getTextureID();
+       textureID[1] = terrain.getTexturedModel().getTextureID2();
+    
     GL::BindVertexArray(vaoID);
 
     GL::EnableVertexAttribArray(0); // 1st attribute buffer : vertices
@@ -47,12 +51,18 @@ void TerrainRenderer::prepareTerrain(Terrain terrain)
 
     // end transformation
     if(textureID > 0)
-	{
+    {
         shader->load_ColorTextureEnable(1);
 		GL::ActiveTexture(GL_TEXTURE0);
-		GL::BindTexture(GL_TEXTURE_2D, textureID);
+		GL::BindTexture(GL_TEXTURE_2D, textureID[0]);
         shader->load_TextureColor(0);   // this means using the first texture
-	}
+
+        shader->load_ColorTextureEnable2(1);
+		GL::ActiveTexture(GL_TEXTURE1);
+		GL::BindTexture(GL_TEXTURE_2D, textureID[1]);
+        shader->load_TextureColor2(1);   // this means using the first texture
+    }
+	
 	else
 	{
 		shader->load_TextureColor(0);   // this means using the first texture

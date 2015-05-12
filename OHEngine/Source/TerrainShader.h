@@ -28,7 +28,9 @@ class TerrainShader : public ShaderProgram
         U_LIGHTENABLED,
         U_NUMLIGHTS,
         U_COLOR_TEXTURE_ENABLED,
+        U_COLOR_TEXTURE_ENABLED2,
         U_COLOR_TEXTURE,
+        U_COLOR_TEXTURE2,
         U_TEXT_ENABLED,
         U_TEXT_COLOR,
         U_TOTAL,
@@ -60,8 +62,12 @@ public:
     ~TerrainShader(void);
 
     void load_MVP(Mtx44 &matrix);    // (normally during render) load the MVP matrix after getting the location in parameters
+
     void load_ColorTextureEnable(int i);
     void load_TextureColor(int i);
+    void load_ColorTextureEnable2(int i);
+    void load_TextureColor2(int i);
+
     void load_Light(Light *light);
     void load_ModelView(Mtx44 &matrix);
     void load_LightEnabled(bool light);

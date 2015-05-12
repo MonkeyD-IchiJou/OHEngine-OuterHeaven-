@@ -180,13 +180,8 @@ void Model::PlayerInit(void)
 
 void Model::TerrainInit(void)
 {
-    terrain["100T1"] = Terrain(0, 0, *loader, *loader->loadTexture("Image//moss1.tga"), "Image//heightmap.raw");
-
-    terrain["200T1"] = Terrain(1, 0, *loader, *loader->loadTexture("Image//moss1.tga"), "Image//heightmap.raw");
-
-    terrain["300T1"] = Terrain(0, 1, *loader, *loader->loadTexture("Image//moss1.tga"), "Image//heightmap.raw");
-
-    terrain["400T1"] = Terrain(1, 1, *loader, *loader->loadTexture("Image//moss1.tga"), "Image//heightmap.raw");
+    terrain["100T1"] = Terrain(0, 0, *loader, loader->loadMultiTexture("Image//brick.tga"), loader->loadMultiTexture("Image//moss1.tga"), "Image//heightmap.raw");
+    terrain["100T1"].setLightEnable(true);
 }
 
 void Model::TextEntityInit(void)

@@ -19,9 +19,9 @@ Terrain::Terrain(void)
 {
 }
 
-Terrain::Terrain(int gridX, int gridZ, MeshLoader loader, Mesh_TexturedModel texture, const char *file_path)
+Terrain::Terrain(int gridX, int gridZ, MeshLoader loader, unsigned int textureID, unsigned int texture2, const char *file_path)
 {
-    this->texture = texture;
+    this->texture = Mesh_MultiTexturedModel(textureID, texture2);
     this->x = gridX * SIZE;
     this->z = gridZ * SIZE;
     this->model = *this->GenerateTerrain(loader, file_path);
@@ -208,12 +208,12 @@ void Terrain::setRawModel(Mesh_RawModel model)
     this->model = model;
 }
 
-Mesh_TexturedModel Terrain::getTexturedModel(void)
+Mesh_MultiTexturedModel Terrain::getTexturedModel(void)
 {
     return texture;
 }
 
-void Terrain::setTexturedModel(Mesh_TexturedModel texture)
+void Terrain::setTexturedModel(Mesh_MultiTexturedModel texture)
 {
     this->texture = texture;
 }

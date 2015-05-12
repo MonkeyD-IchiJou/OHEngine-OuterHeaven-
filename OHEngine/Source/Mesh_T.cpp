@@ -11,7 +11,8 @@
 
 Mesh_TexturedModel::Mesh_TexturedModel(void)
 {
-    textureID = 0;
+        textureID = 0;
+    
 }
 
 Mesh_TexturedModel::Mesh_TexturedModel(unsigned int textureID)

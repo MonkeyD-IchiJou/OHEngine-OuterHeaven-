@@ -15,6 +15,7 @@ To store VBOs and IBO (index buffer) and bind both under VAO
 #include "vertex.h"
 #include "Mesh_R.h"
 #include "Mesh_T.h"
+#include "Mesh_TerrainT.h"
 #include "TextureData.h"
 
 class MeshLoader
@@ -31,6 +32,7 @@ private:
     static std::vector<unsigned int> vaos;
     static std::vector<unsigned int> vbos;
     static std::vector<unsigned int> textures;
+    static std::vector<unsigned int> Terrain_textures;
 
 public:
     MeshLoader();
@@ -38,6 +40,7 @@ public:
 
     Mesh_RawModel* loadToVAO(std::vector<Vertex> vertex_buffer_data, std::vector<GLuint> index_buffer_data);
     Mesh_TexturedModel* loadTexture(const char *file_path);
+    unsigned int loadMultiTexture(const char *file_path);
 
     unsigned int loadCubeMap(const char *file_path[6]);     // for skybox .. ignore this 
 

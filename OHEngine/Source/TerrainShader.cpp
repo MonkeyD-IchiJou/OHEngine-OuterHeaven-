@@ -9,7 +9,7 @@ init all te uniformLocation, load all the info into shader (gluniform blah blah)
 #include <sstream>
 #include "TerrainShader.h"
 
-TerrainShader::TerrainShader(void) : ShaderProgram("Shader//TerrainVertexShader.vertexshader","Shader//TerrainFragmentShader.fragmentshader")
+TerrainShader::TerrainShader(void) : ShaderProgram("Shader//TerrainVertexShader.vertexshader","Shader//MultiTexture.fragmentshader")
 {
     getAllUniformLocations();
 }
@@ -134,8 +134,10 @@ void TerrainShader::getAllUniformLocations(void)
     m_parameters_U_LIGHT_EXPONENT[7] = getUniformLocation("lights[7].exponent");
 
     // Get a handle for our "colorTexture" uniform
-	m_parameters[U_COLOR_TEXTURE_ENABLED] = getUniformLocation("colorTextureEnabled");
-	m_parameters[U_COLOR_TEXTURE] = getUniformLocation("colorTexture");
+	m_parameters[U_COLOR_TEXTURE_ENABLED] = getUniformLocation("colorTextureEnabled[0]");
+	m_parameters[U_COLOR_TEXTURE] = getUniformLocation("colorTexture[0]");
+    m_parameters[U_COLOR_TEXTURE_ENABLED2] = getUniformLocation("colorTextureEnabled[1]");
+	m_parameters[U_COLOR_TEXTURE2] = getUniformLocation("colorTexture[1]");
 
     // Get a handle for our "textColor" uniform
 	m_parameters[U_TEXT_ENABLED] = getUniformLocation("textEnabled");
@@ -178,6 +180,16 @@ void TerrainShader::load_ColorTextureEnable(int i)
 void TerrainShader::load_TextureColor(int i)
 {
     loadU_1i(m_parameters[U_COLOR_TEXTURE], i);
+}
+
+void TerrainShader::load_ColorTextureEnable2(int i)
+{
+    loadU_1i(m_parameters[U_COLOR_TEXTURE_ENABLED2], i);
+}
+
+void TerrainShader::load_TextureColor2(int i)
+{
+    loadU_1i(m_parameters[U_COLOR_TEXTURE2], i);
 }
 
 void TerrainShader::load_Light(Light *light) 

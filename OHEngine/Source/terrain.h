@@ -10,6 +10,7 @@
 #define TERRAIN_H
 
 #include "TexturedModel.h"
+#include "Mesh_TerrainT.h"
 #include "MeshLoader.h"
 #include "Material.h"
 #include "Vector2.h"
@@ -26,7 +27,7 @@ private:
 
     float x, z;
     Mesh_RawModel model;
-    Mesh_TexturedModel texture;
+    Mesh_MultiTexturedModel texture;
     Material material;
     bool enableLight;
 
@@ -38,7 +39,7 @@ private:
 
 public:
     Terrain(void);
-    Terrain(int gridX, int gridZ, MeshLoader loader, Mesh_TexturedModel texture, const char *file_path);
+    Terrain(int gridX, int gridZ, MeshLoader loader, unsigned int textureID, unsigned int texture2, const char *file_path);
     ~Terrain(void);
 
     float getX(void);
@@ -50,8 +51,8 @@ public:
     Mesh_RawModel getRawModel(void);
     void setRawModel(Mesh_RawModel model);
 
-    Mesh_TexturedModel getTexturedModel(void);
-    void setTexturedModel(Mesh_TexturedModel texture);
+    Mesh_MultiTexturedModel getTexturedModel(void);
+    void setTexturedModel(Mesh_MultiTexturedModel texture);
 
     Material getMaterial(void);
     void setMaterial(Material material);

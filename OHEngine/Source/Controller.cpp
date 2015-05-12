@@ -214,7 +214,7 @@ void Controller::ControllerInit(void)
     Application::CreateGLWindow(m_window_width, m_window_height, "MVC Testing 1");
     Application::ReSizeGLScene(); 
     GL::InitGLEW();
-    //Application::DisableCursor();
+    Application::DisableCursor();
     Application::MouseScrollUpdate();
 }
 
