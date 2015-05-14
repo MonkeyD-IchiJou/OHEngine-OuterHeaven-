@@ -116,6 +116,7 @@ bool Controller::GetKeyBoardUpdate(void)
     if(Application::IsKeyPressed(VK_SPACE))
     {
         theModel->UpdatePlayerStatus(' ');
+        theModel->UpdateCameraStatus(' ');
     }
 
     if(Application::IsKeyPressed('Z'))
@@ -136,6 +137,16 @@ bool Controller::GetKeyBoardUpdate(void)
     if(Application::IsKeyPressed('2'))
     {
         theModel->UpdateGLStatus('2');
+    }
+
+    if (Application::IsKeyPressed('3'))
+    {
+        theModel->UpdateGLStatus('3');
+    }
+
+    if(Application::IsKeyPressed('4'))
+    {
+        theModel->UpdateGLStatus('4');
     }
 
     if(Application::IsKeyPressed(VK_ESCAPE))

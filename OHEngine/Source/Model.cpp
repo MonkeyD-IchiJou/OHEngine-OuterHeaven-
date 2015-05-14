@@ -52,8 +52,8 @@ void Model::MeshInit(void)
     delete texmesh;
 
     // second mesh init
-    mesh =  MeshBuilder::GenerateOBJ("OBJ//MicroRobot.obj");   // load all vbos into vao
-    texmesh = loader->loadTexture("Image//sea.tga");                              // load texture
+    mesh =  MeshBuilder::GenerateOBJ("OBJ//Boxman.obj");   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//boxman.tga");                              // load texture
     meshStorage["MICROBOT"] = TexturedModel(*mesh, *texmesh); 
 
     delete mesh;
@@ -103,7 +103,7 @@ void Model::LightInit(void)
     }
 
     light[0].setType(LIGHT_DIRECTIONAL);
-    light[0].setPower(0.9f);
+    light[0].setPower(1.0f);
 
     light[1].setColor(Color(1.f, 0, 0));
     light[1].setPosition(Vector3(500.f, 20.f, 0));
@@ -196,10 +196,18 @@ void Model::Update(const double dt)
 { 
     updateGL();
 
-    player1.move(dt, terrain["100T1"]);
-    camera.Update(dt, player1);      // update the camera
-   
-    camera.setTarget(player1.getPosition());
+    if(camera.getCameraType() == TPS_TYPE)
+    {
+        player1.move(dt, terrain["100T1"]);
+        camera.UpdateTPS(dt, player1);      // update the camera
+        camera.setTarget(player1.getPosition());
+    }
+
+    else
+    {
+        camera.UpdateFPS(dt, terrain["100T1"]);      // update the camera
+    }
+
     entity["100E1"].setPosition(Vector3(camera.getPosition().x, camera.getPosition().y + 1000.f, camera.getPosition().z));
 
     for(int i = 0 ; i < 10; i++)
@@ -207,7 +215,6 @@ void Model::Update(const double dt)
         arrBullets[i].Update(dt);
     }
 
-    text["100X1"];
     entity["300E1"].setPosition(arrBullets[0].getPosition());
 }
 
@@ -221,6 +228,17 @@ void Model::updateGL(void)
     if(controller.getKeysInputs('2'))
     {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+
+    if(controller.getKeysInputs('3'))
+    {
+        camera.setCameraType(TPS_TYPE);
+        camera.setPosition(player1.getPosition() + 5.f);
+    }
+    if(controller.getKeysInputs('4'))
+    {
+        camera.setCameraType(FPS_TYPE);
+        
     }
 }
 

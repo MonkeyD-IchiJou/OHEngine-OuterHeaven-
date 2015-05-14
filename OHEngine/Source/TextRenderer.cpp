@@ -153,7 +153,7 @@ void TextRenderer::renderText(std::vector<TextData> text)
         }
         model.PopMatrix();
         view.PopMatrix();
-        projection.PopMatrix();
+        //projection.PopMatrix();
 
         unbindText();
         ++it;
@@ -171,6 +171,7 @@ void TextRenderer::createTransformationMatrixForText(Vector2 translation, float 
 
 void TextRenderer::LoadProjection(Mtx44 projection)
 {
+    //this->projection.PopMatrix();
     this->projection.PushMatrix();
 	this->projection.LoadMatrix(projection);
 }

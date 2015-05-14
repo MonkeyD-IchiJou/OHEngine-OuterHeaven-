@@ -58,7 +58,8 @@ void Player::move(const double dt, Terrain &terrain)
 
     upwardSpeed += GRAVITY * static_cast<float>(dt);
     increasePosition(Vector3(0, upwardSpeed * static_cast<float>(dt), 0));
-    float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z) + 3.f;
+    float terrainHeight = terrain.getHeightOfTerrain(getPosition().x, getPosition().z) + 2.5f;
+
     if(getPosition().y < terrainHeight)
     {
         upwardSpeed = 0;

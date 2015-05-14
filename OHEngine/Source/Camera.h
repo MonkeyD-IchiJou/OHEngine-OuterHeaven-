@@ -21,35 +21,46 @@ To store camera position, target and up
 */
 /******************************************************************************/
 
-enum CAMERA_VIEW
+enum CAMERA_TYPE
 {
-    FPS_VIEW = 0,
-    TPS_VIEW,
-    FREE_VIEW,
-    TOTAL_VIEW
+    FPS_TYPE = 0,
+    TPS_TYPE,
+    FREE_TYPE,
+    TOTAL_TYPE
 };
 
 class Camera
 {
 private:
+    static float GRAVITY;
+    static float JUMP_POWER;
+    static float TERRAIN_HEIGHT;
+
 	Vector3 position;
 	Vector3 target;
 	Vector3 up;
 
+    bool isInAir;
+    float upwardSpeed;
     float pitch, yaw;
-    static float turnLimit, CAMERA_MOVING_SPEED, MOUSE_SENSITIVITY, turnUpLimit, turnDownLimit;
-    CAMERA_VIEW ViewType;
+    static float turnLimit, CAMERA_MOVING_SPEED, MOUSE_SENSITIVITY;
+    CAMERA_TYPE CamType;
+    Vector3 *point;
+    Vector3 *pivot;
+
     Quaternion q;
 
     InputsController inputs;
 
     void RotateAroundThePoint(Vector3 &point, Vector3 &pivot, const float &w, const Vector3 &v);
+    void jump(void);
 
 public:
 	Camera();
 	~Camera();
 	virtual void Init(const Vector3& pos, const Vector3& target, const Vector3& up);
-    virtual void Update(const double dt, Player &p);
+    virtual void UpdateTPS(const double dt, Player &p);
+    virtual void UpdateFPS(const double dt, Terrain &terrain);
 	virtual void Reset();
     virtual void RotateLeft(const double dt);
     virtual void RotateRight(const double dt);
@@ -65,11 +76,13 @@ public:
 
     virtual void FollowPlayer(const double dt, Player &p);
     virtual void increasePosition(const Vector3& pos);
+    virtual void increaseTarget(const Vector3& tar);
 
     virtual void MouseControl(const double dt);
 
     Vector3 getPosition(void);
     void setPosition(Vector3 position);
+    void setPositionY(float y);
 
     Vector3 getTarget(void);
     void setTarget(const Vector3 &Target);
@@ -77,8 +90,8 @@ public:
     Vector3 getUp(void);
     void setUp(Vector3 Up);
 
-    CAMERA_VIEW getCameraView(void);
-    void setCameraView(CAMERA_VIEW view);
+    CAMERA_TYPE getCameraType(void);
+    void setCameraType(CAMERA_TYPE type);
 
     InputsController& getInputs(void);
 };
