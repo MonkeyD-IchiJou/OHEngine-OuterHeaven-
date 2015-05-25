@@ -98,11 +98,13 @@
     <ClCompile Include="Source\Mesh_R.cpp" />
     <ClCompile Include="Source\Mesh_T.cpp" />
     <ClCompile Include="Source\Mesh_TerrainT.cpp" />
+    <ClCompile Include="Source\Minimap.cpp" />
     <ClCompile Include="Source\Model.cpp" />
     <ClCompile Include="Source\Player.cpp" />
     <ClCompile Include="Source\ShaderProgram.cpp" />
     <ClCompile Include="Source\SkyboxRenderer.cpp" />
     <ClCompile Include="Source\SkyboxShader.cpp" />
+    <ClCompile Include="Source\SpriteAnimation.cpp" />
     <ClCompile Include="Source\StaticShader.cpp" />
     <ClCompile Include="Source\terrain.cpp" />
     <ClCompile Include="Source\TerrainRenderer.cpp" />
@@ -132,6 +134,7 @@
     <ClInclude Include="Source\Mesh_R.h" />
     <ClInclude Include="Source\Mesh_T.h" />
     <ClInclude Include="Source\Mesh_TerrainT.h" />
+    <ClInclude Include="Source\Minimap.h" />
     <ClInclude Include="Source\Model.h" />
     <ClInclude Include="Source\MyApplication.h" />
     <ClInclude Include="Source\MyGL.h" />
@@ -139,6 +142,7 @@
     <ClInclude Include="Source\ShaderProgram.h" />
     <ClInclude Include="Source\SkyboxRenderer.h" />
     <ClInclude Include="Source\SkyboxShader.h" />
+    <ClInclude Include="Source\SpriteAnimation.h" />
     <ClInclude Include="Source\StaticShader.h" />
     <ClInclude Include="Source\terrain.h" />
     <ClInclude Include="Source\TerrainRenderer.h" />

@@ -100,6 +100,12 @@
     <Filter Include="Shader">
       <UniqueIdentifier>{b46b1a75-081b-4f0f-8716-cfdab169d4ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\HUD">
+      <UniqueIdentifier>{b4a126e0-947b-4eda-afe0-1419aecaee2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\HUD">
+      <UniqueIdentifier>{a834d2b3-a3ab-4786-ba3c-836fc2f295f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\main.cpp">
@@ -200,6 +206,12 @@
     </ClCompile>
     <ClCompile Include="Source\Mesh_TerrainT.cpp">
       <Filter>Source Files\Model\MeshData</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SpriteAnimation.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Minimap.cpp">
+      <Filter>Source Files\Model\HUD</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +319,12 @@
     </ClInclude>
     <ClInclude Include="Source\Mesh_TerrainT.h">
       <Filter>Header Files\Model\MeshData</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SpriteAnimation.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Minimap.h">
+      <Filter>Header Files\Model\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
