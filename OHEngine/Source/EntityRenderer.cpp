@@ -50,7 +50,15 @@ void EntityRenderer::render(map<TexturedModel, vector<Entity>> entities)
             model.LoadIdentity();
             model.PushMatrix();
             prepareInstance(it->second[i]);
-            GL::DrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
+            if(it->second[i].getAnimation() == true)
+            {
+                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(it->second[i].getCurrentFrame() * 6 * sizeof(GLuint)));
+            }
+
+            else
+            {
+                GL::DrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
+            }
             model.PopMatrix();
         }
 

@@ -13,7 +13,7 @@ Optimised render class to render mesh, main rendering loop is here
 #include "MyGL.h"
 
 double MasterRenderer::FOV = 90.0;
-double MasterRenderer::ASPECT = 4.0 / 3.0;
+double MasterRenderer::ASPECT = 1680.0 / 1050.0;
 double MasterRenderer::NEAR_PLANE = 0.1;
 double MasterRenderer::FAR_PLANE = 10000.0;
 double MasterRenderer::LEFT = 0.0, 
@@ -155,6 +155,15 @@ void MasterRenderer::render(Light *light, Camera &camera)
 {
     ready();
 
+
+    // terrain will render first baby
+    terrainShader->Start();
+    terrainRenderer->LoadProjection(createPerspectiveMatrix());
+    terrainRenderer->createViewMatrix(camera);
+    terrainRenderer->renderLight(light);
+    terrainRenderer->render(terrains);
+    terrainShader->Stop();
+
     shader->Start();
     renderer->LoadProjection(createPerspectiveMatrix());
     renderer->createViewMatrix(camera);         // take note of this one
@@ -162,12 +171,7 @@ void MasterRenderer::render(Light *light, Camera &camera)
     renderer->render(entities);
     shader->Stop();
 
-    terrainShader->Start();
-    terrainRenderer->LoadProjection(createPerspectiveMatrix());
-    terrainRenderer->createViewMatrix(camera);
-    terrainRenderer->renderLight(light);
-    terrainRenderer->render(terrains);
-    terrainShader->Stop();
+    
 
     textShader->Start();
     textRenderer->LoadProjection(createOrthoMatrix());

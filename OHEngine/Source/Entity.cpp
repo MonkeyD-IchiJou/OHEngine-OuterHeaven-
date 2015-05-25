@@ -12,6 +12,8 @@
 Entity::Entity(void)
 {
     enableLight = true;
+    animation = false;
+    m_currentFrame = 0;
 }
 
 Entity::Entity(TexturedModel mesh, Vector3 position, float w, Vector3 v, float scaleX, float scaleY, float scaleZ)
@@ -23,6 +25,8 @@ Entity::Entity(TexturedModel mesh, Vector3 position, float w, Vector3 v, float s
     this->scaleX = scaleX;
     this->scaleY = scaleY;
     this->scaleZ = scaleZ;
+    animation = false;
+    m_currentFrame = 0;
 }
 
 Entity::~Entity(void)
@@ -165,4 +169,24 @@ Vector3 Entity::getRVector(void)
 void Entity::setRVector(Vector3 v)
 {
     this->v = v;
+}
+
+bool Entity::getAnimation(void)
+{
+    return animation;
+}
+
+void Entity::setAnimation(bool animation)
+{
+    this->animation = animation;
+}
+
+int Entity::getCurrentFrame(void)
+{
+    return m_currentFrame;
+}
+
+void Entity::setCurrentFrame(int m_currentFrame)
+{
+    this->m_currentFrame = m_currentFrame;
 }

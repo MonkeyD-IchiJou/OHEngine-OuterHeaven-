@@ -17,6 +17,7 @@ To store VBOs and IBO (index buffer) and bind both under VAO
 #include "Mesh_T.h"
 #include "Mesh_TerrainT.h"
 #include "TextureData.h"
+#include "SpriteAnimation.h"
 
 class MeshLoader
 {

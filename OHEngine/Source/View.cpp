@@ -28,8 +28,11 @@ void View::InitRenderer(void)
 void View::Draw(void)   
 {
     // gather all the datas in Model .. then send to masterRenderer to render
-
     render->processEntity(theModel->player1);
+
+    render->processEntity(theModel->animation);
+    render->processEntity(theModel->animation2);
+    render->processEntity(theModel->animation3);
 
     for (map<std::string, Entity>::iterator it = theModel->entity.begin(); it != theModel->entity.end(); it++)
     {

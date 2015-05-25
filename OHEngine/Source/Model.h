@@ -21,6 +21,7 @@ All rendering datas storage is here, will merge physic framework soon
 #include "MeshLoader.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "SpriteAnimation.h"
 
 class Model
 {
@@ -30,11 +31,12 @@ private:
     void MeshInit(void);        
     void LightInit(void);       
     void PlayerInit(void);
+    void SpriteAnimationInit(void);
     void EntityInit(void);   
     void TerrainInit(void);
     void TextEntityInit(void);
 
-    void updateGL(void);
+    void updateGL(double dt);
 
 public:
     Model(void);
@@ -56,6 +58,9 @@ public:
     CBulletInfo* arrBullets;
 
     Player player1;
+    SpriteAnimation animation;
+    SpriteAnimation animation2;
+    SpriteAnimation animation3;
 
     virtual void UpdateCameraStatus(const unsigned char key);   
     virtual void UpdateMouseCameraStatus(const unsigned char key); 

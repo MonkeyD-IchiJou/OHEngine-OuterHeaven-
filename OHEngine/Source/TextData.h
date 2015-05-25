@@ -40,10 +40,9 @@ public:
 
     float getSize(void);
     void setSize(float size);
-
+    void setString(std::string text);
     Vector2 getPosition(void);
     void setPosition(Vector2 position);
-
 };
 
 #endif

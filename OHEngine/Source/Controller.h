@@ -25,8 +25,8 @@ private:
     Model* theModel;
     View* theView;
 
-    const static int m_window_width = 640;
-    const static int m_window_height = 480;
+    const static int m_window_width = 1280;
+    const static int m_window_height = 960;
     const static int m_window_deadzone = 100;
 
     InputsController inputs;

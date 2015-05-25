@@ -149,6 +149,16 @@ bool Controller::GetKeyBoardUpdate(void)
         theModel->UpdateGLStatus('4');
     }
 
+    if(Application::IsKeyPressed('5'))
+    {
+        theModel->UpdateGLStatus('5');
+    }
+
+    if(Application::IsKeyPressed('6'))
+    {
+        theModel->UpdateGLStatus('6');
+    }
+
     if(Application::IsKeyPressed(VK_ESCAPE))
     {
         inputs.UpdateMyKeysStatus(VK_ESCAPE);
@@ -223,7 +233,8 @@ void Controller::ControllerInit(void)
 
     Application::InitGLFW();
     Application::CreateGLWindow(m_window_width, m_window_height, "MVC Testing 1");
-    Application::ReSizeGLScene(); 
+   // Application::CreateFullScreenWindow(1680.f, 1050.f, "MVC Testing 1");
+    //Application::ReSizeGLScene(); 
     GL::InitGLEW();
     Application::DisableCursor();
     Application::MouseScrollUpdate();

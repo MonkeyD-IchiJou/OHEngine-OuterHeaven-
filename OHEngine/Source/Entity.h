@@ -25,6 +25,10 @@ protected:
     float rotx, roty, rotz, scaleX, scaleY, scaleZ; // TRS transformation variables
     bool enableLight;
 
+    // temp testing
+    bool animation;
+    int m_currentFrame;
+
 public:
     Entity(void);
     Entity(TexturedModel mesh, Vector3 position, float w, Vector3 v, float scaleX, float scaleY, float scaleZ);
@@ -70,5 +74,11 @@ public:
 
     bool getLight(void);
     void setLightEnable(bool enableLight);
+
+    bool getAnimation(void);
+    void setAnimation(bool animation);
+
+    int getCurrentFrame(void);
+    void setCurrentFrame(int m_currentFrame);
 };
 #endif 

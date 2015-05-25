@@ -23,7 +23,7 @@ private:
     static float MAX_PIXEL_COLOR;
     const static int VERTEX_COUNT = 256;
 
-    unsigned char heights[256][256];
+    float heights[256][256];
 
     float x, z;
     Mesh_RawModel model;
@@ -32,9 +32,9 @@ private:
     bool enableLight;
 
     Mesh_RawModel* GenerateTerrain(MeshLoader loader, const char *file_path);
-    bool LoadHeightMap(const char *file_path, std::vector<unsigned char> &heightMap);
-    float getHeight(unsigned int x, unsigned int z,  std::vector<unsigned char> &heightMap);
-    Vector3 calculateNormal(int x, int z, std::vector<unsigned char> &heightMap);
+    bool LoadHeightMap(const char *file_path, std::vector<float> &heightMap);
+    float getHeight(unsigned int x, unsigned int z,  std::vector<float> &heightMap);
+    Vector3 calculateNormal(int x, int z, std::vector<float> &heightMap);
     static float barryCentric(Vector3 &p1, Vector3 &p2, Vector3 &p3, Vector2 &pos);
 
 public:

@@ -77,3 +77,8 @@ void TextData::setPosition(Vector2 position)
 {
     this->position = position;
 }
+
+void TextData::setString(std::string text)
+{
+    this->text = text;
+}

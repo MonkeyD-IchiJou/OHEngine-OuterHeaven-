@@ -115,6 +115,55 @@ Mesh_RawModel* MeshBuilder::GenerateText(unsigned int numRow, unsigned int numCo
 
     return LockAndLoad->loadToVAO(vertex_buffer_data, index_buffer_data);
 }
+
+Mesh_RawModel* MeshBuilder::GenerateSpriteAnimation(unsigned numRow, unsigned numCol)
+{
+    float width = 1.0f / numCol;
+	float height = 1.0f / numRow;
+    Vertex v;
+	std::vector<Vertex> vertex_buffer_data;
+	std::vector<GLuint> index_buffer_data;
+
+    int offset = 0;
+
+	for(int i = numRow - 1; i >= 0; --i)
+	{
+		for(unsigned int j = 0; j < numCol; ++j)
+		{
+            v.pos.Set(-0.5, -0.5, 0);
+            v.texCoord.Set(j * width, i * height);
+            vertex_buffer_data.push_back(v);
+
+            v.pos.Set(0.5, -0.5, 0);
+            v.texCoord.Set(j * width + width, i * height);
+            vertex_buffer_data.push_back(v);
+
+            v.pos.Set(0.5, 0.5, 0); 
+            v.texCoord.Set(j * width + width, i * height + height);
+            vertex_buffer_data.push_back(v);
+
+            v.pos.Set(-0.5, 0.5, 0);
+            v.texCoord.Set(j * width, i * height + height);
+            vertex_buffer_data.push_back(v);
+
+            //Task: Add 6 indices into index_buffer_data
+            index_buffer_data.push_back(offset + 1);
+            index_buffer_data.push_back(offset + 2);
+            index_buffer_data.push_back(offset + 0);
+            index_buffer_data.push_back(offset + 0);
+            index_buffer_data.push_back(offset + 2);
+            index_buffer_data.push_back(offset + 3);
+
+            offset += 4;
+		}
+	}
+
+    MeshLoader *LockAndLoad = new MeshLoader();
+
+    return LockAndLoad->loadToVAO(vertex_buffer_data, index_buffer_data);
+}
+
+
 /******************************************************************************/
 /*!
 \brief
@@ -475,3 +524,120 @@ Mesh_RawModel* MeshBuilder::GenerateTerrain(const std::string &meshName, const s
     return loader.loadToVAO(vertices, textureCoords, normals, indices);*/
 }
  
+//SpriteAnimation* MeshBuilder::GenerateSpriteAnimation(const std::string
+//    &meshName, unsigned numRow, unsigned numCol)
+//{
+//    Vertex v;
+//    std::vector<Vertex> vertex_buffer_data;
+//    std::vector<GLuint> index_buffer_data;
+//
+//    // Insert codes to render a quad.
+//    // Get new tex coord for each frame.
+//    // Hint: Same as GenerateText()
+//
+//    return *SpriteAnimation();
+//} 
+
+
+Mesh_RawModel* GenerateMinimap(Color color, float length)
+{
+    Vertex v;
+    std::vector<Vertex> vertex_buffer_data;
+    std::vector<GLuint> index_buffer_data;
+
+    // Draw the quad which contains the minimap's texture
+    v.pos.Set(-0.5f * length,-0.5f * length,0);
+    v.color = color;
+    v.normal.Set(0, 0, 1);
+    v.texCoord.Set(0, 0);
+    vertex_buffer_data.push_back(v);
+    v.pos.Set(0.5f * length,-0.5f * length,0);
+    v.color = color;
+    v.normal.Set(0, 0, 1);
+    v.texCoord.Set(1.0f, 0);
+    vertex_buffer_data.push_back(v);
+    v.pos.Set(0.5f * length, 0.5f * length,0);
+    v.color = color;
+    v.normal.Set(0, 0, 1);
+    v.texCoord.Set(1.0f, 1.0f);
+    vertex_buffer_data.push_back(v);
+    v.pos.Set(-0.5f * length, 0.5f * length,0);
+    v.color = color;
+    v.normal.Set(0, 0, 1);
+    v.texCoord.Set(0, 1.0f);
+    vertex_buffer_data.push_back(v);
+
+
+    index_buffer_data.push_back(3);
+    index_buffer_data.push_back(0);
+    index_buffer_data.push_back(2);
+    index_buffer_data.push_back(1);
+    index_buffer_data.push_back(2);
+    index_buffer_data.push_back(0);
+
+    MeshLoader *LockAndLoad = new MeshLoader();
+
+    return LockAndLoad->loadToVAO(vertex_buffer_data, index_buffer_data);
+}
+
+Mesh_RawModel* GenerateMinimapBorder(Color color, float length)
+{
+    Vertex v;
+    std::vector<Vertex> vertex_buffer_data;
+    std::vector<GLuint> index_buffer_data;
+    // Draw the border of the minimap
+    // Draw the quad which contains the minimap's texture
+    v.pos.Set(-0.5f * length,-0.5f * length,0);
+    v.color = color;
+    vertex_buffer_data.push_back(v);
+    v.pos.Set(-0.5f * length, 0.5f * length,0);
+    v.color = color;
+    vertex_buffer_data.push_back(v);
+    v.pos.Set(0.5f * length, 0.5f * length,0);
+    v.color = color;
+    vertex_buffer_data.push_back(v);
+    v.pos.Set(0.5f * length,-0.5f * length,0);
+    v.color = color;
+    vertex_buffer_data.push_back(v);
+    index_buffer_data.push_back(0);
+    index_buffer_data.push_back(1);
+    index_buffer_data.push_back(1);
+    index_buffer_data.push_back(2);
+    index_buffer_data.push_back(2);
+    index_buffer_data.push_back(3);
+    index_buffer_data.push_back(3);
+    index_buffer_data.push_back(0);
+
+    MeshLoader *LockAndLoad = new MeshLoader();
+
+    return LockAndLoad->loadToVAO(vertex_buffer_data, index_buffer_data);
+}
+
+Mesh_RawModel* GenerateMinimapAvatar(Color color, float length)
+{
+    Vertex v;
+    std::vector<Vertex> vertex_buffer_data;
+    std::vector<GLuint> index_buffer_data;
+    // Draw the quad which contains the minimap's texture
+    v.pos.Set(-0.05f * length,-0.10f * length,0);
+    v.color = color;
+    v.normal.Set(0, 0, 1);
+    v.texCoord.Set(0, 0);
+    vertex_buffer_data.push_back(v);
+    v.pos.Set(0.05f * length,-0.10f * length,0);
+    v.color = color;
+    v.normal.Set(0, 0, 1);
+    v.texCoord.Set(1.0f, 0);
+    vertex_buffer_data.push_back(v);
+    v.pos.Set(0, 0.15f * length,0);
+    v.color = color;
+    v.normal.Set(0, 0, 1);
+    v.texCoord.Set(1.0f, 1.0f);
+    vertex_buffer_data.push_back(v);
+    index_buffer_data.push_back(0);
+    index_buffer_data.push_back(1);
+    index_buffer_data.push_back(2);
+    MeshLoader *LockAndLoad = new MeshLoader();
+
+    return LockAndLoad->loadToVAO(vertex_buffer_data, index_buffer_data);
+}

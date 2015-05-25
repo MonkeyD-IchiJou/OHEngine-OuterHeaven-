@@ -64,7 +64,8 @@ void Player::move(const double dt, Terrain &terrain)
     {
         upwardSpeed = 0;
         isInAir = false;
-        setPosition(Vector3(getPosition().x, terrainHeight, getPosition().z));
+        position.y = terrainHeight;
+        //setPosition(Vector3(getPosition().x, terrainHeight, getPosition().z));
     }
 }
 

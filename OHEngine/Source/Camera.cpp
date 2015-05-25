@@ -10,7 +10,7 @@ Camera funtions that calculate and return the latest position of the camera
 #include "Mtx44.h"
 #include "Controller.h"
 
-float Camera::GRAVITY = -50.f;
+float Camera::GRAVITY = -10.f;
 float Camera::JUMP_POWER = 30.f;
 float Camera::TERRAIN_HEIGHT = 5.f;
 
@@ -91,8 +91,6 @@ void Camera::UpdateTPS(const double dt, Player &p)
         ZoomOut(dt);
     }
 
-    
-
     MouseControl(dt);
 }
 
@@ -137,13 +135,14 @@ void Camera::UpdateFPS(const double dt, Terrain &terrain)
     {
         upwardSpeed = 0;
         isInAir = false;
-        setPosition(Vector3(getPosition().x, terrainHeight, getPosition().z));
+        position.y = terrainHeight;
+        //setPosition(Vector3(getPosition().x, terrainHeight, getPosition().z));
     }
-
+    target.y += upwardSpeed * static_cast<float>(dt);
     if (inputs.getKeysInputs(' '))
     {
         jump();
-        target.y += upwardSpeed * static_cast<float>(dt);
+        
     }
 
     MouseControl(dt);

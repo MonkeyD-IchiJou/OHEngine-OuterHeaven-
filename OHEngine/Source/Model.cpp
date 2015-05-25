@@ -11,6 +11,7 @@ All rendering datas is here
 #include "MeshBuilder.h"
 #include "MyMath.h"
 #include <iostream>
+#include <sstream>
 
 Model::Model(void)
 {
@@ -20,7 +21,7 @@ Model::Model(void)
 void Model::InitModel(void)
 {
     // init camera
-    camera.Init(Vector3(150.f, 20.f, 160.f), Vector3(150.f, 0.f, 150.f), Vector3(0, 1, 0));
+    camera.Init(Vector3(390.f, 20.f, 390.f), Vector3(150.f, 0.f, 150.f), Vector3(0, 1, 0));
 
     MeshInit();
     
@@ -29,6 +30,8 @@ void Model::InitModel(void)
     PlayerInit();
 
     EntityInit();
+
+    SpriteAnimationInit();
 
     TerrainInit();
 
@@ -43,9 +46,34 @@ void Model::MeshInit(void)
     Mesh_RawModel *mesh = new Mesh_RawModel();
     Mesh_TexturedModel *texmesh = new Mesh_TexturedModel();
 
+    // 8th mesh init
+    mesh =  MeshBuilder::GenerateSpriteAnimation(4, 7);   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//man2.tga");                              // load texture
+    meshStorage["CAT"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+
+    // 8th mesh init
+    mesh =  MeshBuilder::GenerateSpriteAnimation(1, 10);   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//issacleg.tga");                              // load texture
+    meshStorage["FLAME"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+
+
+    // 8th mesh init
+    mesh =  MeshBuilder::GenerateSpriteAnimation(7, 7);   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//fire.tga");                              // load texture
+    meshStorage["FIRE"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+
     // first mesh init
     mesh =  MeshBuilder::GenerateSkyPlane("yo", Color (1,1,1), 128, 300.0f, 2000.0f, 1.0f, 1.0f);//MeshBuilder::GenerateQuad();    // load all vbos into vao
-    texmesh = loader->loadTexture("Image//top.tga");                              // load texture                                 
+    texmesh = loader->loadTexture("Image//nightsky.tga");                              // load texture                                 
     meshStorage["SKYPLANE"] = TexturedModel(*mesh, *texmesh);  // store rawmesh and texmesh into TexturedModel class
 
     delete mesh;
@@ -58,6 +86,15 @@ void Model::MeshInit(void)
 
     delete mesh;
     delete texmesh;
+
+    // second mesh init
+    mesh =  MeshBuilder::GenerateOBJ("OBJ//spaceship.obj");   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//ARC170_TXT_VERSION_4_D.tga");                              // load texture
+    meshStorage["SPACESHIP"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+
 
     // 3rd mesh init
     mesh =  MeshBuilder::GenerateOBJ("OBJ//bed.obj");   // load all vbos into vao
@@ -74,6 +111,49 @@ void Model::MeshInit(void)
 
     delete mesh;
     delete texmesh;
+
+    // 5th mesh init
+    mesh =  MeshBuilder::GenerateOBJ("OBJ//PyramidHead.obj");   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//phblade2_d.tga");                              // load texture
+    meshStorage["STREETLAMP"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+    
+    // 6th mesh init
+    mesh =  MeshBuilder::GenerateOBJ("OBJ//WoodHouse.obj");   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//MADEIRA2.tga");                              // load texture
+    meshStorage["HOUSE"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+    
+
+    // 6th mesh init
+    mesh =  MeshBuilder::GenerateOBJ("OBJ//centipede.obj");   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//phblade2_d.tga");                              // load texture
+    meshStorage["CENTIPEDE"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+
+    // 7th mesh init
+    mesh =  MeshBuilder::GenerateOBJ("OBJ//rabbit.obj");   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//robbierabbit_bloody_d.tga");                              // load texture
+    meshStorage["RABBIT"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+
+
+    // 7th mesh init
+    mesh =  MeshBuilder::GenerateOBJ("OBJ//jeff.obj");   // load all vbos into vao
+    texmesh = loader->loadTexture("Image//char_prisonermonster_d.tga");                              // load texture
+    meshStorage["JEFF"] = TexturedModel(*mesh, *texmesh); 
+
+    delete mesh;
+    delete texmesh;
+
 
     // text init
     mesh = MeshBuilder::GenerateText(16, 16);
@@ -92,8 +172,8 @@ void Model::LightInit(void)
         light[i].setType(LIGHT_POINT);
         light[i].setPosition(Vector3(0.f, 20.f, 0));
         light[i].setColor(Color(1, 1, 1));
-        light[i].setPower(10.f);
-        light[i].setkC(1.f);
+        light[i].setPower(5.f);
+        light[i].setkC(1.0f);
         light[i].setkL(0.01f);
         light[i].setkQ(0.001f);
         light[i].setcosCutoff(cos(Math::DegreeToRadian(45.f)));
@@ -103,19 +183,19 @@ void Model::LightInit(void)
     }
 
     light[0].setType(LIGHT_DIRECTIONAL);
-    light[0].setPower(1.0f);
+    light[0].setPower(0.5f);
 
     light[1].setColor(Color(1.f, 0, 0));
-    light[1].setPosition(Vector3(500.f, 20.f, 0));
+    light[1].setPosition(Vector3(500.f, 50.f, 250.f));
 
     light[2].setColor(Color(1.f, 1.f, 0));
-    light[2].setPosition(Vector3(100.f, 20.f, 100.f));
+    light[2].setPosition(Vector3(260.f, 20.f, 350.f));
 
     light[3].setColor(Color(1.f, 0, 1.f));
     light[3].setPosition(Vector3(200.f, 20.f, 500.f));
 
     light[4].setColor(Color(0, 0, 1.f));
-    light[4].setPosition(Vector3(300.f, 20.f, 0));
+    light[4].setPosition(Vector3(300.f, 20.f, -350.f));
 
     light[5].setColor(Color(1.f, 1.f, 0));
     light[5].setPosition(Vector3(400.f, 20.f, 10.f));
@@ -123,10 +203,11 @@ void Model::LightInit(void)
     light[6].setType(LIGHT_SPOT);
     light[6].setPower(1.5f);
     light[6].setColor(Color(1.f, 1.f, 1.f));
-    light[6].setPosition(Vector3(10.f, 20.f, 400.f));
+    light[6].setPosition(Vector3(350.f, 10.f, 350.f));
 
-    light[7].setColor(Color(0, 1.f, 0));
-    light[7].setPosition(Vector3(10.f, 20.f, 200.f));
+    light[7].setColor(Color(1.f, 1.f, 1.f));
+    light[7].setPower(1.3f);
+    light[7].setPosition(Vector3(400.f, 10.f, 400.f));
 }
 
 void Model::EntityInit(void)
@@ -144,11 +225,10 @@ void Model::EntityInit(void)
     tempEntity.setLightEnable(false);
     entity["100E1"] = tempEntity;
 
-    tempEntity = Entity(meshStorage["BED"], Vector3(400.f, 0.f, 500.f),  90.f, Vector3(0.f, 1.f, 0), 15.0f, 15.0f, 15.0f);      // final stage
-    m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
-    m.setkSpecular(Component(1.0f, 1.0f, 1.0f));
-    m.setkAmbient(Component(0.01f, 0.01f, 0.01f));
-    m.setkShininess(10.f);
+    tempEntity = Entity(meshStorage["HOUSE"], Vector3(420.f, 10.f, 430.f),  180.f, Vector3(0.f, 1.f, 0), 5.0f, 5.0f, 5.0f);      // final stage
+    m.setkSpecular(Component(0.01f, 0.01f, 0.01f));
+    m.setkAmbient(Component(0.1f, 0.1f, 0.1f));
+    m.setkShininess(1.f);
     tempEntity.setMaterial(m);
     tempEntity.setLightEnable(true);
     entity["200E1"] = tempEntity;
@@ -161,7 +241,103 @@ void Model::EntityInit(void)
     tempEntity.setMaterial(m);
     tempEntity.setLightEnable(true);
     entity["300E1"] = tempEntity;
+
+    tempEntity = Entity(meshStorage["STREETLAMP"], Vector3(260.f, 0.f, 330.f),  0.f, Vector3(0.f, 1.f, 0), 3.0f, 3.0f, 3.0f);      // final stage
+    m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
+    m.setkSpecular(Component(1.0f, 1.0f, 1.0f));
+    m.setkAmbient(Component(0.01f, 0.01f, 0.01f));
+    m.setkShininess(10.f);
+    tempEntity.setMaterial(m);
+    tempEntity.setLightEnable(true);
+    entity["400E1"] = tempEntity;
+
+    tempEntity = Entity(meshStorage["STREETLAMP"], Vector3(310.f, 10.f, 420.f),  120.f, Vector3(0.f, 1.f, 0), 5.0f, 5.0f, 5.0f);      // final stage
+    m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
+    m.setkSpecular(Component(1.0f, 1.0f, 1.0f));
+    m.setkAmbient(Component(0.01f, 0.01f, 0.01f));
+    m.setkShininess(10.f);
+    tempEntity.setMaterial(m);
+    tempEntity.setLightEnable(true);
+    entity["700E1"] = tempEntity;
+
+    tempEntity = Entity(meshStorage["HOUSE"], Vector3(300.f, 0.f, 300.f),  0.f, Vector3(0.f, 1.f, 0), 5.0f, 5.0f, 5.0f);      // final stage
+    m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
+    m.setkSpecular(Component(0.01f, 0.01f, 0.01f));
+    m.setkAmbient(Component(0.1f, 0.1f, 0.1f));
+    m.setkShininess(1.f);
+    tempEntity.setMaterial(m);
+    tempEntity.setLightEnable(true);
+    entity["500E1"] = tempEntity;
+
+
+    tempEntity = Entity(meshStorage["CENTIPEDE"], Vector3(350.f, 0.f, 350.f),  -45.f, Vector3(0.f, 1.f, 0), 3.0f, 3.0f, 3.0f);      // final stage
+    m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
+    m.setkSpecular(Component(1.0f, 1.0f, 1.0f));
+    m.setkAmbient(Component(0.01f, 0.01f, 0.01f));
+    m.setkShininess(10.f);
+    tempEntity.setMaterial(m);
+    tempEntity.setLightEnable(true);
+    entity["600E1"] = tempEntity;
+
+
+    tempEntity = Entity(meshStorage["RABBIT"], Vector3(320.f, 2.f, 350.f),  -45.f, Vector3(0.f, 1.f, 0), 2.0f, 2.0f, 2.0f);      // final stage
+    m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
+    m.setkSpecular(Component(0.2f, 0.2f, 0.2f));
+    m.setkAmbient(Component(0.01f, 0.01f, 0.01f));
+    m.setkShininess(1.f);
+    tempEntity.setMaterial(m);
+    tempEntity.setLightEnable(true);
+    entity["800E1"] = tempEntity;
+
+    tempEntity = Entity(meshStorage["SPACESHIP"], Vector3(320.f, 50.f, 350.f),  -45.f, Vector3(0.f, 1.f, 0), 2.0f, 2.0f, 2.0f);      // final stage
+    m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
+    m.setkSpecular(Component(0.2f, 0.2f, 0.2f));
+    m.setkAmbient(Component(0.01f, 0.01f, 0.01f));
+    m.setkShininess(1.f);
+    tempEntity.setMaterial(m);
+    tempEntity.setLightEnable(true);
+    entity["900E1"] = tempEntity;
+
+
+    tempEntity = Entity(meshStorage["JEFF"], Vector3(330.f, 40.f, 350.f),  -45.f, Vector3(0.f, 1.f, 0), 2.0f, 2.0f, 2.0f);      // final stage
+    m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
+    m.setkSpecular(Component(0.2f, 0.2f, 0.2f));
+    m.setkAmbient(Component(0.01f, 0.01f, 0.01f));
+    m.setkShininess(1.f);
+    tempEntity.setMaterial(m);
+    tempEntity.setLightEnable(true);
+    entity["010E1"] = tempEntity;
 }
+
+void Model::SpriteAnimationInit(void)
+{
+    Entity tempEntity;
+
+    animation2 = SpriteAnimation(meshStorage["FIRE"], Vector3(420.f, 20.f, 390.f),  0, Vector3(0.f, 0, 0), 30.0f, 30.0f, 30.0f, 7, 7);
+    animation2.setAnimation(true);
+    animation2.setLightEnable(false);
+
+    animation2.m_anim = new Animation();
+    animation2.m_anim->Set(0, 47, 0, 3.f);
+
+
+
+    animation = SpriteAnimation(meshStorage["CAT"], Vector3(500.f, 50.f, 250.f),  0, Vector3(0.f, 0, 0), 4.f, 4.f, 4.f, 4, 7);
+    animation.setAnimation(true);
+    animation.setLightEnable(false);
+
+    animation.m_anim = new Animation();
+    animation.m_anim->Set(0, 26, 0, 1.f);
+
+    
+    animation3 = SpriteAnimation(meshStorage["FLAME"], Vector3(380.f, 15.f, 390.f),  0, Vector3(0.f, 0, 0), 4.f, 4.f, 4.f, 1, 10);
+    animation3.setAnimation(true);
+    animation3.setLightEnable(false);
+
+    animation3.m_anim = new Animation();
+    animation3.m_anim->Set(0, 9, 0, 1.f);
+}
+
 
 void Model::PlayerInit(void)
 {
@@ -169,7 +345,7 @@ void Model::PlayerInit(void)
     Material m;     // just a temporary variable for setting up material
 
     float height = terrain["100T1"].getHeightOfTerrain(camera.getTarget().x, camera.getTarget().z) + 3.f;
-    player1 = Player(meshStorage["MICROBOT"], Vector3(camera.getTarget().x, height, camera.getTarget().z),  0, Vector3(0.f, 0, 0), 0.5f, 0.5f, 0.5f);
+    player1 = Player(meshStorage["SPACESHIP"], Vector3(390.f, height, 390.f),  0, Vector3(0.f, 0, 0), 0.5f, 0.5f, 0.5f);
     m.setkDiffuse(Component(1.0f, 1.0f, 1.0f));
     m.setkSpecular(Component(0.1f, 0.1f, 0.1f));
     m.setkAmbient(Component(0.01f, 0.01f, 0.01f));
@@ -180,35 +356,43 @@ void Model::PlayerInit(void)
 
 void Model::TerrainInit(void)
 {
-    terrain["100T1"] = Terrain(0, 0, *loader, loader->loadMultiTexture("Image//brick.tga"), loader->loadMultiTexture("Image//moss1.tga"), "Image//heightmap.raw");
+    terrain["100T1"] = Terrain(0, 0, *loader, loader->loadMultiTexture("Image//blood.tga"), loader->loadMultiTexture("Image//grass.tga"), "Image//mm.raw");
     terrain["100T1"].setLightEnable(true);
 }
 
 void Model::TextEntityInit(void)
 {
-    std::string a;
-    char c = 2;
-    a.push_back(c);
-    text["100X1"] = TextData(textMeshStorage["JOKERFONT"], words, Color(0.f, 0.f, 0.f), 5.f, Vector2(10.f, 10.f)); 
+    text["100X1"] = TextData(textMeshStorage["JOKERFONT"], "FPS: ", Color(1.f, 0.f, 0.f), 3.f, Vector2(10.f, 50.f)); 
 }
 
 void Model::Update(const double dt)
 { 
-    updateGL();
+    updateGL(dt);
 
     if(camera.getCameraType() == TPS_TYPE)
     {
-        player1.move(dt, terrain["100T1"]);
         camera.UpdateTPS(dt, player1);      // update the camera
+        player1.move(dt, terrain["100T1"]);
+        
+        //camera.setTarget(Vector3(player1.getPosition().x, 3.f, player1.getPosition().z));
         camera.setTarget(player1.getPosition());
+        //light[7].setPosition(camera.getTarget());
+        
     }
 
     else
     {
         camera.UpdateFPS(dt, terrain["100T1"]);      // update the camera
+        light[7].setPosition(camera.getPosition());
     }
 
     entity["100E1"].setPosition(Vector3(camera.getPosition().x, camera.getPosition().y + 1000.f, camera.getPosition().z));
+
+    std::ostringstream spos;
+	spos.precision(5);
+	spos << "FPS: " << 1.0/dt;
+    text["100X1"].setString(spos.str());
+
 
     for(int i = 0 ; i < 10; i++)
     {
@@ -216,9 +400,29 @@ void Model::Update(const double dt)
     }
 
     entity["300E1"].setPosition(arrBullets[0].getPosition());
-}
 
-void Model::updateGL(void)
+    // animation update here
+    animation.Update(dt);
+    animation2.Update(dt);
+    animation3.Update(dt);
+
+    Vector3 dir = camera.getPosition() - animation.getPosition();
+    Vector3 dir2 = camera.getPosition() - animation2.getPosition();
+    Vector3 dir3 = camera.getPosition() - animation3.getPosition();
+
+
+    animation2.setAngle(Math::RadianToDegree(atan2(dir2.x, dir2.z)));
+    animation2.setRVector(Vector3(0, 1, 0));
+
+    animation.setAngle(Math::RadianToDegree(atan2(dir.x, dir.z)));
+    animation.setRVector(Vector3(0, 1, 0));
+
+    
+    animation3.setAngle(Math::RadianToDegree(atan2(dir3.x, dir3.z)));
+    animation3.setRVector(Vector3(0, 1, 0));
+}
+//static float lights = 0;
+void Model::updateGL(double dt)
 {
     if(controller.getKeysInputs('1'))
     {
@@ -238,6 +442,21 @@ void Model::updateGL(void)
     if(controller.getKeysInputs('4'))
     {
         camera.setCameraType(FPS_TYPE);
+        
+    }
+
+    if(controller.getKeysInputs('5'))
+    {
+        float lights = light[0].getPower();
+        lights+=0.1f * static_cast<float>(dt);
+        light[0].setPower(lights);
+    }
+
+    if(controller.getKeysInputs('6'))
+    {
+        float lights = light[0].getPower();
+        lights-=0.1f * static_cast<float>(dt);
+        light[0].setPower(lights);
         
     }
 }
