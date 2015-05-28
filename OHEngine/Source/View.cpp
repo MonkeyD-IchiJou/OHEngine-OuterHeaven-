@@ -30,9 +30,20 @@ void View::Draw(void)
     // gather all the datas in Model .. then send to masterRenderer to render
     render->processEntity(theModel->player1);
 
+
     render->processEntity(theModel->animation);
     render->processEntity(theModel->animation2);
     render->processEntity(theModel->animation3);
+
+    render->processWeapon(theModel->bazooka);
+    render->processTwoD(theModel->bulletUI);
+    render->processTwoD(theModel->miniMap);
+    render->processTwoD(theModel->Cursor);
+
+    if(theModel->Line.lineRender == true)
+    {
+        render->processLine(theModel->Line);
+    }
 
     for (map<std::string, Entity>::iterator it = theModel->entity.begin(); it != theModel->entity.end(); it++)
     {

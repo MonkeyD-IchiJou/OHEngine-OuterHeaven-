@@ -32,7 +32,10 @@ public:
     static Mesh_RawModel* GenerateMinimapBorder(Color color, float length = 1.f);
     static Mesh_RawModel* GenerateMinimapAvatar(Color color, float length = 1.f);
 
-    static Mesh_RawModel* MeshBuilder::GenerateSpriteAnimation(unsigned numRow, unsigned numCol);
+    static Mesh_RawModel* GenerateSpriteAnimation(unsigned numRow, unsigned numCol);
+
+    static Mesh_RawModel* GenerateLine(void);
+
 };
 
 #endif

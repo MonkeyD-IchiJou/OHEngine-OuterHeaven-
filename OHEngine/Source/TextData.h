@@ -22,6 +22,7 @@ private:
     Color color;
     float size;
     Vector2 position;
+    
 
 public:
     TextData(void);
@@ -43,6 +44,9 @@ public:
     void setString(std::string text);
     Vector2 getPosition(void);
     void setPosition(Vector2 position);
+
+    Vector3 v;
+    float w;
 };
 
 #endif

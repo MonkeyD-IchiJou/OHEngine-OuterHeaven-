@@ -142,6 +142,13 @@ void TerrainShader::getAllUniformLocations(void)
     // Get a handle for our "textColor" uniform
 	m_parameters[U_TEXT_ENABLED] = getUniformLocation("textEnabled");
 	m_parameters[U_TEXT_COLOR] = getUniformLocation("textColor");
+
+    m_parameters[U_FOG_COLOR] = getUniformLocation("fogParam.color");
+    m_parameters[U_FOG_START] = getUniformLocation("fogParam.start");
+    m_parameters[U_FOG_END] = getUniformLocation("fogParam.end");
+    m_parameters[U_FOG_DENSITY] = getUniformLocation("fogParam.density");
+    m_parameters[U_FOG_TYPE] = getUniformLocation("fogParam.type");
+    m_parameters[U_FOG_ENABLE] = getUniformLocation("fogParam.enabled");
 }
 
 void TerrainShader::load_MVP(Mtx44 &matrix)
@@ -233,6 +240,42 @@ void TerrainShader::load_TextColor(Color color)
 {
     Vector3 v(color.r, color.g, color.b);
     loadU_Vec3f(m_parameters[U_TEXT_COLOR], v);
+}
+
+void TerrainShader::load_FogColor(Color color)
+{
+    Vector3 v(color.r, color.g, color.b);
+    loadU_Vec3f(m_parameters[U_FOG_COLOR], v);
+}
+
+
+void TerrainShader::load_FogStart(float Start)
+{
+    loadU_1f(m_parameters[U_FOG_START], Start);
+}
+
+
+void TerrainShader::load_FogEnd(float End)
+{
+    loadU_1f(m_parameters[U_FOG_END], End);
+}
+
+
+void TerrainShader::load_FogDensity(float Density)
+{
+    loadU_1f(m_parameters[U_FOG_DENSITY], Density);
+}
+
+
+void TerrainShader::load_FogType(int Type)
+{
+    loadU_1i(m_parameters[U_FOG_TYPE], Type);
+}
+
+
+void TerrainShader::load_FogEnabled(bool Enabled)
+{
+    loadU_Bool(m_parameters[U_FOG_ENABLE], Enabled);
 }
 
 TerrainShader::~TerrainShader(void)

@@ -42,7 +42,7 @@ private:
 
     bool isInAir;
     float upwardSpeed;
-    float pitch, yaw;
+    
     static float turnLimit, CAMERA_MOVING_SPEED, MOUSE_SENSITIVITY;
     CAMERA_TYPE CamType;
     Vector3 *point;
@@ -52,9 +52,15 @@ private:
 
     InputsController inputs;
 
-    void RotateAroundThePoint(Vector3 &point, Vector3 &pivot, const float &w, const Vector3 &v);
+    void RotateAroundThePoint(Vector3 &point, Vector3 &pivot, const float &w, const Vector3 &v, const double dt);
     void jump(void);
 
+    float shakeAngle;
+    bool changeShakingDir;
+    bool secondTurn;
+    bool doneShaking;
+
+    
 public:
 	Camera();
 	~Camera();
@@ -73,6 +79,8 @@ public:
     virtual void MoveBack(const double dt);
     virtual void ZoomIn(const double dt);
     virtual void ZoomOut(const double dt);
+
+    virtual void cameraShake(const double dt, float angle, bool loop);
 
     virtual void FollowPlayer(const double dt, Player &p);
     virtual void increasePosition(const Vector3& pos);
@@ -94,6 +102,13 @@ public:
     void setCameraType(CAMERA_TYPE type);
 
     InputsController& getInputs(void);
+
+
+    bool moving;
+
+    double Timer;
+
+    float pitch, yaw;
 };
 
 #endif

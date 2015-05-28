@@ -14,6 +14,7 @@ Entity::Entity(void)
     enableLight = true;
     animation = false;
     m_currentFrame = 0;
+    lineRender = false;
 }
 
 Entity::Entity(TexturedModel mesh, Vector3 position, float w, Vector3 v, float scaleX, float scaleY, float scaleZ)
@@ -27,6 +28,9 @@ Entity::Entity(TexturedModel mesh, Vector3 position, float w, Vector3 v, float s
     this->scaleZ = scaleZ;
     animation = false;
     m_currentFrame = 0;
+    bool setup = false;
+    lineRender = false;
+    renderFog = true;
 }
 
 Entity::~Entity(void)
@@ -69,6 +73,21 @@ Vector3 Entity::getPosition(void)
 void Entity::setPosition(Vector3 position)
 {
     this->position = position;
+}
+
+void Entity::setPositionX(float x)
+{
+    this->position.x = x;
+}
+
+void Entity::setPositionY(float y)
+{
+    this->position.y = y;
+}
+
+void Entity::setPositionZ(float z)
+{
+    this->position.z = z;
 }
 
 float Entity::getRotx(void)

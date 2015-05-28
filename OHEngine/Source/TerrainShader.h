@@ -33,6 +33,12 @@ class TerrainShader : public ShaderProgram
         U_COLOR_TEXTURE2,
         U_TEXT_ENABLED,
         U_TEXT_COLOR,
+        U_FOG_COLOR,
+        U_FOG_START,
+        U_FOG_END,
+        U_FOG_DENSITY,
+        U_FOG_TYPE,
+        U_FOG_ENABLE,
         U_TOTAL,
     };
 
@@ -79,6 +85,13 @@ public:
 
     void load_TextEnabled(bool enableText);
     void load_TextColor(Color color);
+
+    void load_FogColor(Color color);
+    void load_FogStart(float Start);
+    void load_FogEnd(float End);
+    void load_FogDensity(float Density);
+    void load_FogType(int Type);
+    void load_FogEnabled(bool Enabled);
 };
 
 #endif

@@ -46,10 +46,11 @@ void SpriteAnimation::Update(double dt)
         // If the m_currentTime is greater than animTime Set animation end flag, ended to true
         if(m_currentTime > m_anim->animTime)
         {
-            m_anim->ended = true;
+           m_anim->ended = true;
 
             if(m_playCount + 1 < m_anim->repeatCount || m_anim->repeatCount == 0)
             {
+                
                 m_playCount += dt;
                 m_currentTime = 0;
                 m_currentFrame = m_anim->startFrame;

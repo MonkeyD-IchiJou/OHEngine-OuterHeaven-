@@ -125,13 +125,13 @@ void TextRenderer::renderText(std::vector<TextData> text)
 
         glDisable(GL_DEPTH_TEST);
 
-        view.PushMatrix();
-        view.LoadIdentity();
+        //view.PushMatrix();
+        //view.LoadIdentity();
         model.PushMatrix();
         model.LoadIdentity();
 
         // transformation for text is here
-        createTransformationMatrixForText(it->getPosition(), it->getSize());
+        createTransformationMatrixForText(it->getPosition(), it->getSize(), it->w, it->v);
 
         shader->load_TextEnabled(true);
         shader->load_TextColor(it->getColor());
@@ -147,12 +147,12 @@ void TextRenderer::renderText(std::vector<TextData> text)
 
             characterSpacing.SetToTranslation(sp, 0, 0); //1.0f is the spacing of each character, you may change this value
 
-            shader->load_MVP(projection.Top() * view.Top() * model.Top() * characterSpacing);
+            shader->load_MVP(projection.Top() *  model.Top() * characterSpacing);
 
             GL::DrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)((unsigned)it->getText()[i] * 6 * sizeof(GLuint)));
         }
         model.PopMatrix();
-        view.PopMatrix();
+        //view.PopMatrix();
         //projection.PopMatrix();
 
         unbindText();
@@ -163,9 +163,10 @@ void TextRenderer::renderText(std::vector<TextData> text)
     glEnable(GL_DEPTH_TEST);
 }
 
-void TextRenderer::createTransformationMatrixForText(Vector2 translation, float size)
+void TextRenderer::createTransformationMatrixForText(Vector2 translation, float size, float w, Vector3 v)
 {
     model.Translate(translation.x, translation.y, 0);
+    model.QuaternionRotate(w, v);
     model.Scale(size, size, size);
 }
 

@@ -22,6 +22,7 @@ All rendering datas storage is here, will merge physic framework soon
 #include "Bullet.h"
 #include "Player.h"
 #include "SpriteAnimation.h"
+#include "Weapon.h"
 
 class Model
 {
@@ -32,9 +33,11 @@ private:
     void LightInit(void);       
     void PlayerInit(void);
     void SpriteAnimationInit(void);
-    void EntityInit(void);   
+    void EntityInit(void);
+    void WeaponInit(void);
     void TerrainInit(void);
     void TextEntityInit(void);
+    void UIInit(void);
 
     void updateGL(double dt);
 
@@ -62,12 +65,23 @@ public:
     SpriteAnimation animation2;
     SpriteAnimation animation3;
 
+
+    Entity bulletUI;
+    Entity miniMap;
+    Entity Cursor;
+
+    Weapon bazooka;
+    Entity Line;
+
     virtual void UpdateCameraStatus(const unsigned char key);   
     virtual void UpdateMouseCameraStatus(const unsigned char key); 
     virtual void UpdateGLStatus(const unsigned char key);           
     virtual void UpdateWeaponStatus(const unsigned char key);   
     virtual void UpdatePlayerStatus(const unsigned char key);
     virtual void UpdateWordsStatus(const unsigned char key);
+
+    virtual void UpdateGrenade(const double dt);
+
     std::string words;
 
     void InitModel(void);
@@ -81,6 +95,24 @@ public:
         WA_CHANGEWEAPON,
         WA_TOTAL,
     };
+
+    void gunAnimation(const double dt);
+    void gunRotateXWhenFiring(const double dt);
+    void gunWalking(const double dt);
+    void switchWeapon(const double dt);
+    bool switchWeaponLiao;
+
+    void gunReloadAni(const double dt);
+    bool reloadTime;
+    float countBullet;
+
+    Vector3 velociyforGrenade;
+    Vector3 m_gravity;
+
+    bool throwG;
+
+    bool collision;
+
 };
 
 #endif

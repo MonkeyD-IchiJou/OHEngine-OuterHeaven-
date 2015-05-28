@@ -8,7 +8,7 @@
 /******************************************************************************/
 
 #include "MyGL.h"
-#include "EntityRenderer.h"
+#include "WeaponRenderer.h"
 #include "Utility.h"
 
 #include <iostream>
@@ -21,57 +21,58 @@ using std::getline;
 using std::string;
 
 
-EntityRenderer::EntityRenderer(void)
+WeaponRenderer::WeaponRenderer(void)
 {
 }
 
-EntityRenderer::EntityRenderer(StaticShaders *shader, Mtx44 projection)
+WeaponRenderer::WeaponRenderer(StaticShaders *shader, Mtx44 projection)
 {
     this->shader = shader;
     LoadProjection(projection);
 }
 
-EntityRenderer::~EntityRenderer(void)
+WeaponRenderer::~WeaponRenderer(void)
 {
 }
 
-void EntityRenderer::render(map<TexturedModel, vector<Entity>> entities)
+void WeaponRenderer::render(Weapon weapon)
 {
-    map<TexturedModel, vector<Entity>>::iterator it = entities.begin();
+    glClear(GL_DEPTH_BUFFER_BIT);
 
-    // loading one by one in map .. efficiently
-    while(it != entities.end())
-    {
-        prepareTexturedModel(it->first);
-        unsigned int indexSize = it->first.getRawModel().getIndexSize();
+    model.LoadIdentity();
+    model.PushMatrix();
 
-        for(unsigned int i = 0; i < it->second.size(); i++)
-        {
-            model.LoadIdentity();
-            model.PushMatrix();
-            prepareInstance(it->second[i]);
-            
-                shader->load_FogEnabled(it->second[i].renderFog);
-            
 
-            if(it->second[i].getAnimation() == true)
-            {
-                glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, (void*)(it->second[i].getCurrentFrame() * 6 * sizeof(GLuint)));
-            }
 
-            else
-            {
-                GL::DrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
-            }
-            model.PopMatrix();
-        }
+    createTransformationMatrix(weapon.getPosition(), weapon.getAngle(), weapon.getRVector(), weapon.getScaleX(), weapon.getScaleY(), weapon.getScaleZ(), weapon.getWX(), weapon.getVX());
+    prepareInstance(weapon);
+    renderSpecific(weapon.getMesh());
 
-        unbindTexturedModel();
-        ++it;
-    }
+    model.PushMatrix();
+    model.Translate(0, 0, weapon.silderAni);
+    prepareInstance(weapon);
+    renderSpecific(weapon.getSliderMesh());
+    model.PopMatrix();
+
+    model.PushMatrix();
+    model.Translate(0, weapon.magazineAni, 0);
+    prepareInstance(weapon);
+    renderSpecific(weapon.getMagazineMesh());
+
+    model.PopMatrix();
+    model.PopMatrix();
+    
 }
 
-void EntityRenderer::prepareTexturedModel(TexturedModel model)
+void WeaponRenderer::renderSpecific(TexturedModel mesh)
+{
+    prepareTexturedModel(mesh);
+    unsigned int indexSize = mesh.getRawModel().getIndexSize();
+    GL::DrawElements(GL_TRIANGLES, indexSize, GL_UNSIGNED_INT, 0);
+    unbindTexturedModel();
+}
+
+void WeaponRenderer::prepareTexturedModel(TexturedModel model)
 {
     unsigned int vaoID = model.getRawModel().getVaoID();
     unsigned int textureID = model.getTexturedModel().getTextureID();
@@ -97,7 +98,7 @@ void EntityRenderer::prepareTexturedModel(TexturedModel model)
 	}
 }
 
-void EntityRenderer::unbindTexturedModel(void)
+void WeaponRenderer::unbindTexturedModel(void)
 {
     GL::DisableVertexAttribArray(0);
 	GL::DisableVertexAttribArray(1);
@@ -109,39 +110,36 @@ void EntityRenderer::unbindTexturedModel(void)
     GL::BindVertexArray(0);
 }
 
-void EntityRenderer::prepareInstance(Entity &entity)
+void WeaponRenderer::prepareInstance(Weapon &weapon)
 {
     // transformation is done down here
-    createTransformationMatrix(entity.getPosition(), entity.getAngle(), entity.getRVector(), entity.getScaleX(), entity.getScaleY(), entity.getScaleZ());
+    //createTransformationMatrix(weapon.getPosition(), weapon.getAngle(), weapon.getRVector(), weapon.getScaleX(), weapon.getScaleY(), weapon.getScaleZ(), weapon.getWX(), weapon.getVX());
 
-    
-
-    
-    shader->load_MVP(projection.Top() * view.Top() * model.Top());
-
-    
+   
+    view.LoadIdentity();
+    shader->load_MVP(projection.Top() *  view.Top() * model.Top());
     // end transformation
 
     Mtx44 modelView;  // temp variable
     modelView = view.Top() * model.Top();       // week 6
     shader->load_ModelView(modelView);          // load mv into shader
 
-    if(entity.getLight())
+    if(weapon.getLight())
 	{
-        shader->load_LightEnabled(entity.getLight());     // tell shader to enable light
+        shader->load_LightEnabled(weapon.getLight());     // tell shader to enable light
 
         shader->load_ModelView_Inverse_Transpose(modelView.GetInverse().GetTranspose());
 
 		//load material
-        shader->load_Material(entity.getMaterial());
+        shader->load_Material(weapon.getMaterial());
 	}
 	else
 	{	
-		shader->load_LightEnabled(entity.getLight());     // tell shader to disable light
+		shader->load_LightEnabled(weapon.getLight());     // tell shader to disable light
 	}
 }
 
-void EntityRenderer::renderLight(Light *light)
+void WeaponRenderer::renderLight(Light *light)
 {
     for(int i= 0; i < 8; i++)
     {
@@ -171,13 +169,13 @@ void EntityRenderer::renderLight(Light *light)
     }
 }
 
-void EntityRenderer::LoadProjection(Mtx44 projection)
+void WeaponRenderer::LoadProjection(Mtx44 projection)
 {
     this->projection.PushMatrix();
 	this->projection.LoadMatrix(projection);
 }
 
-void EntityRenderer::createViewMatrix(Camera &camera)
+void WeaponRenderer::createViewMatrix(Camera &camera)
 {
     //Set view matrix using camera settings
     view.LoadIdentity();
@@ -188,15 +186,14 @@ void EntityRenderer::createViewMatrix(Camera &camera)
         );
 }
 
-void EntityRenderer::createTransformationMatrixSlerp(Vector3 translation, float w, Vector3 v, float s)
+void WeaponRenderer::createTransformationMatrixSlerp(Vector3 translation, float w, Vector3 v, float s)
 {
 }
 
-
-void EntityRenderer::createTransformationMatrix(Vector3 translation, float w, Vector3 v, float sx, float sy, float sz)
+void WeaponRenderer::createTransformationMatrix(Vector3 translation, float w, Vector3 v, float sx, float sy, float sz, float wx, Vector3 vx)
 {
     model.Translate(translation.x, translation.y, translation.z);
     model.QuaternionRotate(w, v);
-    //model.QuaternionRotate(-5, Vector3(1, 0, 0));
+    model.QuaternionRotate(wx, vx);
     model.Scale(sx, sy, sz);
 }

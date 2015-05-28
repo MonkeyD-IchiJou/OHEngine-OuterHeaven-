@@ -42,18 +42,18 @@ bool Controller::GetKeyBoardUpdate(void)
     {
         theModel->UpdateCameraStatus('a');
         theModel->UpdatePlayerStatus('a');
-        //theModel->UpdateWordsStatus('A');
+        theModel->UpdateGLStatus('a');
     }
 
-    /*if(Application::IsKeyPressed('B'))
+    if(Application::IsKeyPressed('B'))
     {
-        theModel->UpdateWordsStatus('B');
+        theModel->UpdateGLStatus('b');
     }
 
     if(Application::IsKeyPressed('C'))
     {
-        theModel->UpdateWordsStatus('C');
-    }*/
+        theModel->UpdateGLStatus('c');
+    }
     
     if(Application::IsKeyPressed('D'))
     {
@@ -101,6 +101,16 @@ bool Controller::GetKeyBoardUpdate(void)
         theModel->UpdateWordsStatus('M');
     }*/
 
+    if(Application::IsKeyPressed('N'))
+    {
+        theModel->UpdateGLStatus('n');
+    }
+
+    if(Application::IsKeyPressed('V'))
+    {
+        theModel->UpdateGLStatus('v');
+    }
+
     if(Application::IsKeyPressed('W'))
     {
         theModel->UpdateCameraStatus('w');
@@ -111,6 +121,7 @@ bool Controller::GetKeyBoardUpdate(void)
     {
         theModel->UpdateCameraStatus('s');
         theModel->UpdatePlayerStatus('s');
+        theModel->UpdateGLStatus('s');
     }
 
     if(Application::IsKeyPressed(VK_SPACE))
@@ -157,6 +168,36 @@ bool Controller::GetKeyBoardUpdate(void)
     if(Application::IsKeyPressed('6'))
     {
         theModel->UpdateGLStatus('6');
+    }
+
+    if(Application::IsKeyPressed('0'))
+    {
+        theModel->UpdateGLStatus('0');
+    }
+
+    if(Application::IsKeyPressed('9'))
+    {
+        theModel->UpdateGLStatus('9');
+    }
+
+    if (Application::IsKeyPressed(VK_UP))
+    {
+        theModel->UpdateGLStatus(VK_UP);
+    }
+
+    if (Application::IsKeyPressed(VK_DOWN))
+    {
+        theModel->UpdateGLStatus(VK_DOWN);
+    }
+
+    if (Application::IsKeyPressed(VK_LEFT))
+    {
+        theModel->UpdateGLStatus(VK_LEFT);
+    }
+
+    if (Application::IsKeyPressed(VK_RIGHT))
+    {
+        theModel->UpdateGLStatus(VK_RIGHT);
     }
 
     if(Application::IsKeyPressed(VK_ESCAPE))
@@ -233,7 +274,7 @@ void Controller::ControllerInit(void)
 
     Application::InitGLFW();
     Application::CreateGLWindow(m_window_width, m_window_height, "MVC Testing 1");
-   // Application::CreateFullScreenWindow(1680.f, 1050.f, "MVC Testing 1");
+    //Application::CreateFullScreenWindow(1680, 1050, "MVC Testing 1");
     //Application::ReSizeGLScene(); 
     GL::InitGLEW();
     Application::DisableCursor();

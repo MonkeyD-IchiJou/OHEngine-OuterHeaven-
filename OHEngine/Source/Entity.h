@@ -44,6 +44,9 @@ public:
 
     Vector3 getPosition(void);
     void setPosition(Vector3 position);
+    void setPositionX(float x);
+    void setPositionY(float y);
+    void setPositionZ(float z);
 
     float getRotx(void);
     void setRotx(float rotx);
@@ -80,5 +83,9 @@ public:
 
     int getCurrentFrame(void);
     void setCurrentFrame(int m_currentFrame);
+
+    bool setup;
+    bool lineRender;
+    bool renderFog;
 };
 #endif 

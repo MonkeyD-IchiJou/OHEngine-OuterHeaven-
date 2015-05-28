@@ -45,6 +45,29 @@ Mesh_RawModel* MeshBuilder::GenerateOBJ(const std::string &file_path) {
 
     return LockAndLoad->loadToVAO(vertex_buffer_data, index_buffer_data);
 }
+
+Mesh_RawModel* MeshBuilder::GenerateLine(void)
+{
+    Vertex v;
+	std::vector<Vertex> vertex_buffer_data;
+	std::vector<GLuint> index_buffer_data;
+
+    v.pos.Set(1, -0.75, 4.5);
+    v.color.Set(1, 1, 1);
+    vertex_buffer_data.push_back(v);
+
+    v.pos.Set(0, 0, -0.2);
+    v.color.Set(1, 1, 1);
+    vertex_buffer_data.push_back(v);
+
+    index_buffer_data.push_back(1);
+    index_buffer_data.push_back(0);
+
+    MeshLoader *LockAndLoad = new MeshLoader();
+
+    return LockAndLoad->loadToVAO(vertex_buffer_data, index_buffer_data);
+}
+
 /******************************************************************************/
 /*!
 \brief
@@ -351,6 +374,7 @@ Mesh_RawModel* MeshBuilder::GenerateQuad(float tex)
     Color color = (1.f, 0.f, 0.f);
 
 	v.pos.Set(-1.0f * length, 1.0f * length, 0.0f * length);		//top left
+    v.color = color;
 	v.normal.Set (0, 0, 1);
 	v.texCoord.Set (0, tex);
 	vertex_buffer_data.push_back(v);

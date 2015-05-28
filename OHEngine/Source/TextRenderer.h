@@ -28,7 +28,7 @@ private:
 
     void prepareTextDisplaying(TexturedModel model);
     void unbindText(void);
-    void createTransformationMatrixForText(Vector2 translation, float size);
+    void createTransformationMatrixForText(Vector2 translation, float size, float w, Vector3 v);
 
 public:
     TextRenderer(void);

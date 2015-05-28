@@ -10,11 +10,11 @@ Camera funtions that calculate and return the latest position of the camera
 #include "Mtx44.h"
 #include "Controller.h"
 
-float Camera::GRAVITY = -10.f;
+float Camera::GRAVITY = -50.f;
 float Camera::JUMP_POWER = 30.f;
-float Camera::TERRAIN_HEIGHT = 5.f;
+float Camera::TERRAIN_HEIGHT = 10.f;
 
-float Camera::CAMERA_MOVING_SPEED = 15.f;
+float Camera::CAMERA_MOVING_SPEED = 20.f;
 float Camera::turnLimit = 0;
 float Camera::MOUSE_SENSITIVITY = 500.f;
 
@@ -42,6 +42,18 @@ void Camera::Init(const Vector3& pos, const Vector3& target, const Vector3& up)
     upwardSpeed = 0;
 
     setCameraType(FPS_TYPE);
+
+    moving = false;
+
+    shakeAngle = 0;
+
+    changeShakingDir = false;
+
+    doneShaking = false;
+
+    secondTurn = false;
+
+    Timer = 0;
 }
 
 void Camera::Reset()
@@ -94,6 +106,7 @@ void Camera::UpdateTPS(const double dt, Player &p)
     MouseControl(dt);
 }
 
+
 void Camera::UpdateFPS(const double dt, Terrain &terrain)
 {
     if (inputs.getMouseInputs(InputsController::SCROLL_UP) == true)
@@ -108,24 +121,60 @@ void Camera::UpdateFPS(const double dt, Terrain &terrain)
 
     if (inputs.getKeysInputs('w') == true)
     {
+        moving = true;
         MoveForward(dt);
+        
     }
 
     if (inputs.getKeysInputs('a') == true)
     {
         MoveLeft(dt);
+        moving = true;
     }
 
     if (inputs.getKeysInputs('s') == true)
     {
         MoveBack(dt);
+        moving = true;
     }
 
     if (inputs.getKeysInputs('d') == true)
     {
+        
         MoveRight(dt);
+        moving = true;
     }
 
+    if(moving == true && isInAir == false && doneShaking == true)
+    {
+        cameraShake(dt * 4, 0.5f, true);
+    }
+
+    if(isInAir == false)
+    {
+        if(!doneShaking)
+        {
+            if(Timer <= 1.3)
+            {
+                cameraShake(dt * 25, 1.f, false);
+            }
+
+            if(Timer > 1.31)
+            {
+                cameraShake(dt * 100, 5.5f, false);
+            }
+        }
+    }
+
+    else
+    {
+        doneShaking = false;
+    }
+    
+    if(isInAir)
+    {
+        Timer+= dt;
+    }
     upwardSpeed += GRAVITY * static_cast<float>(dt);
     increasePosition(Vector3(0, upwardSpeed * static_cast<float>(dt), 0));
     
@@ -142,10 +191,52 @@ void Camera::UpdateFPS(const double dt, Terrain &terrain)
     if (inputs.getKeysInputs(' '))
     {
         jump();
+        Timer = 0;
         
     }
 
     MouseControl(dt);
+
+}
+
+void Camera::cameraShake(const double dt, float angle, bool loop)
+{
+    Vector3 view = (target - position).Normalized();
+    up.Set(0, 1, 0);
+    
+    std::cout << shakeAngle << std::endl;
+    if(!changeShakingDir)
+    {
+        shakeAngle += dt;
+        Quaternion q(shakeAngle, view);
+        up = q * up;
+        if(shakeAngle > angle)
+        {
+            if(secondTurn == true && shakeAngle > 0 && loop == false)
+            {
+                up.Set(0, 1, 0);
+                shakeAngle = 0;
+                doneShaking = true;
+            }
+
+            changeShakingDir = true;
+            secondTurn = false;
+        }
+    }
+
+    else
+    {
+        shakeAngle -= dt;
+        Quaternion q(shakeAngle, view);
+        up = q * up;
+        if(shakeAngle < -angle)
+        {
+            changeShakingDir = false;
+            secondTurn = true;
+        }
+    }
+
+    
 }
 
 void Camera::jump(void)
@@ -209,25 +300,26 @@ void Camera::MoveBack(const double dt)
 
 }
 
-void Camera::RotateAroundThePoint(Vector3 &point, Vector3 &pivot, const float &w, const Vector3 &v)
+void Camera::RotateAroundThePoint(Vector3 &point, Vector3 &pivot, const float &w, const Vector3 &v, const double dt)
 {
     q = Quaternion(w, v);
    
     Vector3 dir = point - pivot;
     dir = q * dir;
-    point = dir + pivot;
+    point = (dir) + pivot;
+    
 }
 
 void Camera::RotateLeft(const double dt)
 {
     yaw = (float)(-MOUSE_SENSITIVITY * (float)dt);
-    RotateAroundThePoint(position, target, yaw, up);
+    RotateAroundThePoint(position, target, yaw, up, dt);
 }
 
 void Camera::RotateRight(const double dt)
 {  
     yaw = (float)(MOUSE_SENSITIVITY * (float)dt);
-    RotateAroundThePoint(position, target, yaw, up);
+    RotateAroundThePoint(position, target, yaw, up, dt);
 }
 
 void Camera::LookUp(const double dt)
@@ -239,7 +331,7 @@ void Camera::LookUp(const double dt)
 
     pitch = (float)(dt) * MOUSE_SENSITIVITY;
     
-    RotateAroundThePoint(position, target, pitch, right);
+    RotateAroundThePoint(position, target, pitch, right, dt);
 }
 
 void Camera::LookDown(const double dt)
@@ -285,27 +377,38 @@ void Camera::ZoomOut(const double dt)
     position -= view;
     turnLimit = (target - position).Length();
 }
+float speed = 0;
+float force = 0;
 
+float spd =0;
+float frc = 0;
 void Camera::MouseControl(const double dt)
 {
+    
     // up and down
     {
+
         Vector3 view = (target - position).Normalized();
         Vector3 right = view.Cross(up);
         right.y = 0;
         right.Normalize();
 
-        pitch = (float)(dt* Controller::camera_pitch) * -MOUSE_SENSITIVITY;
 
-        RotateAroundThePoint(*point, *pivot, pitch, right);
+        pitch = (float)(dt* Controller::camera_pitch) * -MOUSE_SENSITIVITY ;
+        
+
+        RotateAroundThePoint(*point, *pivot, pitch, right, dt);
     }
+
+    {
 
     // left and right
-    {
+
         yaw = MOUSE_SENSITIVITY * (float)(dt * Controller::camera_yaw);
 
-        RotateAroundThePoint(*point, *pivot, yaw, up);
+        RotateAroundThePoint(*point, *pivot, yaw, up, dt);
     }
+    
 }
 
 Vector3 Camera::getPosition(void)

@@ -90,16 +90,16 @@ void TerrainRenderer::loadModelMatrix(Terrain &terrain)
     shader->load_MVP(projection.Top() * view.Top() * model.Top());
     // end transformation
 
+    Mtx44 modelView;  // temp variable
+
+    modelView = view.Top() * model.Top();       // week 6
+    shader->load_ModelView(modelView);          // load mv into shader
+
     if(terrain.getLight())
 	{
         shader->load_LightEnabled(terrain.getLight());     // tell shader to enable light
 
-		Mtx44 modelView;  // temp variable
-        
-		modelView = view.Top() * model.Top();
-        shader->load_ModelView(modelView);          // load mv into shader
-
-        shader->load_ModelView_Inverse_Transpose(modelView);
+        shader->load_ModelView_Inverse_Transpose(modelView.GetInverse().GetTranspose());
 
 		//load material
         shader->load_Material(terrain.getMaterial());
