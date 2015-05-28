@@ -38,7 +38,10 @@ public:
 	void Translate(float translateX, float translateY, float translateZ);
     void ReflectXYPlane();
     void ReflectXZPlane();
-    void ReflectYZPlane();   
+    void ReflectYZPlane();  
+
+    void ShearingXY(float x, float y);
+
     void Frustum(double left, double right, double	bottom, double top, double near, double far);
 	void LookAt(double eyeX, double eyeY, double eyeZ,
 				double centerX, double centerY, double centerZ,

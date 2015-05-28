@@ -188,6 +188,13 @@ void MS::Translate(float translateX, float translateY, float translateZ) {
 	ms.top() = ms.top() * mat;
 }
 
+void MS::ShearingXY(float x, float y)
+{
+    Mtx44 mat;
+	mat.SetToShearing(x, y);
+	ms.top() = ms.top() * mat;
+}
+
 void MS::ReflectXYPlane()
 {
     Mtx44 mat;

@@ -43,7 +43,7 @@ public:
     void SetToReflectionXYplane();
     void SetToReflectionXZplane();
     void SetToReflectionYZplane();
-    void SetToShearingXaxis(float x);
+    void SetToShearing(float x, float y);
 	void SetToFrustum(double left, double right, double	bottom, double top, double near, double far);
 	void SetToLookAt(double eyeX, double eyeY, double eyeZ,
 				double centerX, double centerY, double centerZ,
