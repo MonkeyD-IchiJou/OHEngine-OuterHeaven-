@@ -22,11 +22,11 @@ void main(){
 	// Output position of the vertex, in clip space : MVP * position
 	gl_Position =  MVP * vec4(vertexPosition_modelspace, 1);
 	
+	// Vector position, in camera space
+	vertexPosition_cameraspace = ( MV * vec4(vertexPosition_modelspace, 1) ).xyz;
+
 	if(lightEnabled == true)
 	{
-		// Vector position, in camera space
-		vertexPosition_cameraspace = ( MV * vec4(vertexPosition_modelspace, 1) ).xyz;
-		
 		// Vertex normal, in camera space
 		// Use MV if ModelMatrix does not scale the model ! Use its inverse transpose otherwise.
 		vertexNormal_cameraspace = ( MV_inverse_transpose * vec4(vertexNormal_modelspace, 0) ).xyz;
